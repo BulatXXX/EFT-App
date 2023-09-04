@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HeaderText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">32sp</item>
+        <item name="fontFamily">@font/geometria_extrabold</item>
+    </style>
+    <style name="Heading1" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/geometria_bold</item>
+    </style>
+    <style name="RegularText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/geometria_medium</item>
+    </style>
+    <style name="RegularEditText" parent="RegularText">
+        <item name="hintTextColor">@color/grey</item>
+        <item name="colorControlNormal">@color/grey</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="backgroundTint">@color/grey</item>
+    </style>
+    <style name="OutlinedRegularButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/geometria_medium</item>
+    </style>
+
+</resources>

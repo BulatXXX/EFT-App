@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">KotlinPracticeMIREA</string>
+    <string name="app_name">EFT App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_to_the_tarkov_club_buddy">Welcome\nto the Tarkov Club\nBuddy</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="Name">Your Name</string>
+    <string name="choose_your_side">Choose your side</string>
+    <string name="save">Save</string>
 </resources>
