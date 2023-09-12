@@ -23,21 +23,21 @@ class MainFragment : Fragment() {
     private val runnable = Runnable {
         binding.viewpager.currentItem = binding.viewpager.currentItem + 1
     }
-    private var name = ""
+
     private var side: EFTFraction? = null
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater , container , false)
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+        super.onViewCreated(view , savedInstanceState)
         initViewPager()
         binding.bearBtn.setOnClickListener {
             side = EFTFraction.PMC_BEAR
@@ -50,22 +50,18 @@ class MainFragment : Fragment() {
             binding.usecBtn.setImageResource(R.drawable.usec_fraction_img_choosen)
         }
         binding.saveBtn.setOnClickListener {
-            name = binding.enterNameEditText.text.toString()
-            if (name.isNotEmpty()) {
-                when (side) {
-                    EFTFraction.PMC_BEAR -> {
-                        Toast.makeText(context, "HELLO $name from Bear", Toast.LENGTH_SHORT).show()
-                    }
-                    EFTFraction.PMC_USEC -> {
-                        Toast.makeText(context, "HELLO $name from USEC", Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-                        Toast.makeText(context, "ERROR: CHOOSE A SIDE", Toast.LENGTH_SHORT).show()
-                    }
+            when (side) {
+                EFTFraction.PMC_BEAR -> {
+
                 }
-            }else{
-                Toast.makeText(context,"ERROR: ENTER NAME",Toast.LENGTH_SHORT).show()
+                EFTFraction.PMC_USEC -> {
+
+                }
+                else -> {
+                    Toast.makeText(context , "ERROR: CHOOSE A SIDE" , Toast.LENGTH_SHORT).show()
+                }
             }
+
         }
     }
 
@@ -83,7 +79,7 @@ class MainFragment : Fragment() {
         imageList.add(R.drawable.tarkov_img2)
         imageList.add(R.drawable.tarkov_img3)
 
-        val adapter = ImageAdapter(imageList, binding.viewpager)
+        val adapter = ImageAdapter(imageList , binding.viewpager)
 
         binding.viewpager.adapter = adapter
         binding.viewpager.offscreenPageLimit = 3
@@ -96,7 +92,7 @@ class MainFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 handler.removeCallbacks(runnable)
-                handler.postDelayed(runnable, 3000)
+                handler.postDelayed(runnable , 3000)
 
 
             }
@@ -112,13 +108,13 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, 2000)
+        handler.postDelayed(runnable , 2000)
     }
 
     private fun setUpTransformer() {
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
-        transformer.addTransformer { page, position ->
+        transformer.addTransformer { page , position ->
             val r = 1 - kotlin.math.abs(position)
             page.scaleY = 0.85f + r * 0.14f
 

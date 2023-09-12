@@ -54,31 +54,13 @@
             app:layout_constraintTop_toTopOf="@+id/bearBtn" />
 
         <TextView
-            android:id="@+id/enterYourNameTextView"
-            style="@style/Heading1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/enter_your_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewpager" />
-
-        <EditText
-            android:id="@+id/enterNameEditText"
-            style="@style/RegularEditText"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/Name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enterYourNameTextView" />
-
-        <TextView
             android:id="@+id/chooseYourSideTextView"
             style="@style/Heading1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/choose_your_side"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enterNameEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/viewpager" />
 
         <Button
             android:id="@+id/saveBtn"

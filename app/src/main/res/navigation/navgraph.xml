@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/notesFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -12,19 +12,20 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_bearFragment"
-            app:destination="@id/bearFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_usecFragment"
-            app:destination="@id/usecFragment" />
+            app:destination="@id/fractionInventoryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/bearFragment"
+        android:id="@+id/fractionInventoryFragment"
         android:name="com.example.kotlinpracticemirea.FractionInventoryFragment"
         android:label="fragment_bear"
-        tools:layout="@layout/fragment_fraction_inventory" />
+        tools:layout="@layout/fragment_fraction_inventory" >
+        <action
+            android:id="@+id/action_fractionInventoryFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/usecFragment"
-        android:name="com.example.kotlinpracticemirea.UsecFragment"
-        android:label="fragment_usec"
-        tools:layout="@layout/fragment_usec" />
+        android:id="@+id/notesFragment"
+        android:name="com.example.kotlinpracticemirea.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" />
 </navigation>

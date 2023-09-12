@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#232323">
+
+        <TextView
+            android:id="@+id/header"
+            style="@style/Heading1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="0dp"
+            android:text="Adding note"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/icons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/header">
+
+            <ImageView
+                android:id="@+id/weapon_ic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/weapon_icon_w" />
+
+            <ImageView
+                android:id="@+id/plus_ic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/icon_plus_sign_w" />
+
+            <ImageView
+                android:id="@+id/ammo_ic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/icon_ammunition__w" />
+
+            <ImageView
+                android:id="@+id/food_ic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/food_icon_w" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icons">
+
+            <EditText
+                android:id="@+id/name_et"
+                android:hint="Item name"
+                android:fontFamily="@font/geometria_medium"
+                android:textColor="@color/white"
+                android:layout_width="250dp"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/price"
+                android:hint="Item price"
+                android:fontFamily="@font/geometria_medium"
+                android:textColor="@color/white"
+                android:layout_margin="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_et"
+            >
+            <Button
+                android:id="@+id/cancel_btn"
+                style="@style/OutlinedRegularButton"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                />
+            <Button
+                android:id="@+id/save_btn"
+                style="@style/ElevatedRegularButton"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
