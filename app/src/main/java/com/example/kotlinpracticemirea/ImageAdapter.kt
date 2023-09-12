@@ -15,7 +15,6 @@ class ImageAdapter(private val imageList: ArrayList<Int>, private val viewPager2
 
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding: ImageContainerBinding = ImageContainerBinding.bind(itemView)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {

@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/bearFragment"
-        android:name="com.example.kotlinpracticemirea.BearFragment"
+        android:name="com.example.kotlinpracticemirea.FractionInventoryFragment"
         android:label="fragment_bear"
-        tools:layout="@layout/fragment_bear" />
+        tools:layout="@layout/fragment_fraction_inventory" />
     <fragment
         android:id="@+id/usecFragment"
         android:name="com.example.kotlinpracticemirea.UsecFragment"
