@@ -9,16 +9,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
+import androidx.compose.runtime.collectAsState
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpracticemirea.databinding.AddNoteCustomDialogBinding
 import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 
 class NotesFragment : Fragment() {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
-    private val items = ArrayList<FleaMarketItem>()
+
+    val fleaMarketItemViewModel by viewModels<FleaMarketItemViewModel>(factoryProducer = {object : ViewModelProvider.Factory{
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return FleaMarketItemViewModel(requireContext()) as T
+        }
+    }})
+
+    private val items : ArrayList<FleaMarketItem> = ArrayList()
     private var adapter = FleaMarketItemAdapter(items)
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -35,6 +52,11 @@ class NotesFragment : Fragment() {
         binding.rv.adapter = adapter
         binding.rv.layoutManager =
             LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false)
+
+
+
+
+
         var selectedIcon: Int = R.drawable.weapon_icon_w
         binding.noteButton.setOnClickListener {
             val dialog = Dialog(requireContext())
