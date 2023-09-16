@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -25,7 +28,8 @@ class FractionInventoryFragment : Fragment() {
     private val runnable = Runnable {
         binding.viewpagerGear.currentItem = binding.viewpagerGear.currentItem + 1
     }
-    private val fraction = EFTFraction.PMC_BEAR
+    private val args by navArgs<FractionInventoryFragmentArgs>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -39,9 +43,13 @@ class FractionInventoryFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         recyclerViewInit()
+        val fraction = if (args.fraction) EFTFraction.PMC_USEC else EFTFraction.PMC_BEAR
         uiInit(fraction)
 
-
+        binding.imageView.setOnClickListener {
+            val action = FractionInventoryFragmentDirections.actionFractionInventoryFragmentToNotesFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
     }
 
     private fun uiInit(fraction: EFTFraction) {
@@ -51,6 +59,7 @@ class FractionInventoryFragment : Fragment() {
             binding.specialGearTV.text = "Your USEC equipment:"
         }
         viewPagerInit(fraction)
+
     }
 
     private fun viewPagerInit(fraction: EFTFraction) {
@@ -242,6 +251,7 @@ class FractionInventoryFragment : Fragment() {
                 return false
             }
         }
+
         binding.itemsRV.layoutManager = layoutManager
     }
 

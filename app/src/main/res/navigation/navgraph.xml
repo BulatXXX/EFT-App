@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/notesFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -22,6 +22,10 @@
         <action
             android:id="@+id/action_fractionInventoryFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <argument
+            android:name="fraction"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/notesFragment"

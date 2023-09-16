@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -52,10 +54,12 @@ class MainFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             when (side) {
                 EFTFraction.PMC_BEAR -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToBearFragment(fraction = false)
+                    Navigation.findNavController(requireView()).navigate(action)
                 }
                 EFTFraction.PMC_USEC -> {
-
+                    val action = MainFragmentDirections.actionMainFragmentToBearFragment(fraction = true)
+                    Navigation.findNavController(requireView()).navigate(action)
                 }
                 else -> {
                     Toast.makeText(context , "ERROR: CHOOSE A SIDE" , Toast.LENGTH_SHORT).show()

@@ -15,6 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpracticemirea.databinding.AddNoteCustomDialogBinding
@@ -52,8 +54,9 @@ class NotesFragment : Fragment() {
         binding.rv.adapter = adapter
         binding.rv.layoutManager =
             LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false)
-
-
+        binding.backButton.setOnClickListener {
+            Navigation.findNavController(requireView()).popBackStack()
+        }
 
 
 
