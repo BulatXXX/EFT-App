@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        val fragmentManager = supportFragmentManager
 
+
+        fragmentManager.beginTransaction().replace(R.id.container,MainFragment()).commit()
+        setContentView(binding.root)
     }
 }

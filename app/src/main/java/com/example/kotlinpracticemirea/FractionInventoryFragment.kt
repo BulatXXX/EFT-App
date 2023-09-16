@@ -25,7 +25,7 @@ class FractionInventoryFragment : Fragment() {
     private val runnable = Runnable {
         binding.viewpagerGear.currentItem = binding.viewpagerGear.currentItem + 1
     }
-    private val fraction = EFTFraction.PMC_BEAR
+
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -39,7 +39,12 @@ class FractionInventoryFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         recyclerViewInit()
+        val args = arguments
+        val fraction = if (arguments?.getBoolean("fraction")!!) EFTFraction.PMC_USEC else EFTFraction.PMC_BEAR
         uiInit(fraction)
+        binding.imageView.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.container,NotesFragment()).addToBackStack(null).commit()
+        }
 
 
     }
@@ -50,6 +55,7 @@ class FractionInventoryFragment : Fragment() {
             binding.fractionImage.setImageResource(R.drawable.usec_fraction_img)
             binding.specialGearTV.text = "Your USEC equipment:"
         }
+
         viewPagerInit(fraction)
     }
 

@@ -33,6 +33,9 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         binding.rv.adapter = adapter
+        binding.backButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
         binding.rv.layoutManager =
             LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false)
         var selectedIcon: Int = R.drawable.weapon_icon_w

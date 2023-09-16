@@ -52,10 +52,19 @@ class MainFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             when (side) {
                 EFTFraction.PMC_BEAR -> {
+                    val bundle = Bundle()
+                    bundle.putBoolean("fraction",false)
+                    val fragment = FractionInventoryFragment()
+                    fragment.arguments = bundle
+                    parentFragmentManager.beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit()
 
                 }
                 EFTFraction.PMC_USEC -> {
-
+                    val bundle = Bundle()
+                    bundle.putBoolean("fraction",true)
+                    val fragment = FractionInventoryFragment()
+                    fragment.arguments = bundle
+                    parentFragmentManager.beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit()
                 }
                 else -> {
                     Toast.makeText(context , "ERROR: CHOOSE A SIDE" , Toast.LENGTH_SHORT).show()
