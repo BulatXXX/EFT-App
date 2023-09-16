@@ -46,6 +46,7 @@ class FractionInventoryFragment : Fragment() {
         val fraction = if (args.fraction) EFTFraction.PMC_USEC else EFTFraction.PMC_BEAR
         uiInit(fraction)
 
+
         binding.imageView.setOnClickListener {
             val action = FractionInventoryFragmentDirections.actionFractionInventoryFragmentToNotesFragment()
             Navigation.findNavController(requireView()).navigate(action)
