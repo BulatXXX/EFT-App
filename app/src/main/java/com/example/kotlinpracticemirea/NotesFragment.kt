@@ -21,24 +21,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpracticemirea.databinding.AddNoteCustomDialogBinding
 import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlin.coroutines.coroutineContext
 
-
+@AndroidEntryPoint
 class NotesFragment : Fragment() {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
 
-    val fleaMarketItemViewModel by viewModels<FleaMarketItemViewModel>(factoryProducer = {object : ViewModelProvider.Factory{
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return FleaMarketItemViewModel(requireContext()) as T
-        }
-    }})
+    val fleaMarketItemViewModel : FleaMarketItemViewModel by viewModels()
 
     private val items : ArrayList<FleaMarketItem> = ArrayList()
-    private var adapter = FleaMarketItemAdapter(items)
+    private var adapter = FleaMarketItemAdapter()
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
@@ -54,6 +51,7 @@ class NotesFragment : Fragment() {
         binding.rv.adapter = adapter
         binding.rv.layoutManager =
             LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false)
+        fleaMarketItemViewModel.items
         binding.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
         }

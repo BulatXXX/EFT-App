@@ -18,8 +18,9 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 
 import com.example.kotlinpracticemirea.databinding.FragmentFractionInventoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FractionInventoryFragment : Fragment() {
     private var _binding: FragmentFractionInventoryBinding? = null
     private val binding get() = _binding!!
