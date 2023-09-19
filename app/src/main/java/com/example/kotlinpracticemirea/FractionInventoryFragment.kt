@@ -31,6 +31,7 @@ class FractionInventoryFragment : Fragment() {
     private val args by navArgs<FractionInventoryFragmentArgs>()
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
