@@ -9,23 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Toast
-import androidx.compose.runtime.collectAsState
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.example.kotlinpracticemirea.databinding.AddNoteCustomDialogBinding
 import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.coroutineContext
 
 @AndroidEntryPoint
 class NotesFragment : Fragment() {
@@ -49,6 +46,12 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         binding.rv.adapter = adapter
+
+
+        fleaMarketItemViewModel.items.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+            binding.rv.adapter = adapter
+        }
         binding.rv.layoutManager =
             LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false)
         fleaMarketItemViewModel.items
@@ -71,9 +74,16 @@ class NotesFragment : Fragment() {
             }
             dialogBinding.saveBtn.setOnClickListener {
                 with(dialogBinding){
-                    val item = FleaMarketItem(nameEt.text.toString(),price.text.toString(), img = selectedIcon)
-                    items.add(item)
-                    adapter.notifyDataSetChanged()
+                    val item = FleaMarketItem(id = null, nameEt.text.toString(),price.text.toString(), img = selectedIcon)
+                    println("BOOBS $item")
+
+                    /*
+                    CoroutineScope(Dispatchers.IO).launch {
+                        db.fleaMarketDao().addItem(item)
+                    }
+
+                     */
+
                     dialog.dismiss()
                 }
 

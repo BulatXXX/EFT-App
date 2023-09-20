@@ -23,8 +23,8 @@ abstract class FleaMarketDatabase: RoomDatabase() {
             super.onCreate(db)
             val dao = database.get().fleaMarketDao()
             applicationScope.launch {
-                dao.addItem(FleaMarketItem("Red rebel ice pick","2,5KK",R.drawable.knife_icon_w))
-                dao.addItem(FleaMarketItem("Red Keycard","50KK",R.drawable.icon_plus_sign_w))
+                dao.addItem(FleaMarketItem(null,"Red rebel ice pick","2,5KK",R.drawable.knife_icon_w))
+                dao.addItem(FleaMarketItem(null,"Red Keycard","50KK",R.drawable.icon_plus_sign_w))
             }
 
         }

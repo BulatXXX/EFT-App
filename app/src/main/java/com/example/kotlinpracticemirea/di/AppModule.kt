@@ -3,7 +3,9 @@ package com.example.kotlinpracticemirea.di
 import android.app.Application
 import android.app.SharedElementCallback
 import androidx.room.Room
+import com.example.kotlinpracticemirea.FleaMarketDao
 import com.example.kotlinpracticemirea.FleaMarketDatabase
+import com.example.kotlinpracticemirea.FleaMarketItemRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +30,12 @@ object AppModule {
         .build()
 
     @Provides
+    @Singleton
     fun provideDao(db: FleaMarketDatabase) = db.fleaMarketDao()
+
+    @Provides
+    @Singleton
+    fun provideRepository(dao: FleaMarketDao) = FleaMarketItemRepository(dao)
 
     @ApplicationScope
     @Provides
