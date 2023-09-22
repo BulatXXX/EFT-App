@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.kotlinpracticemirea.MainFragment"
+        android:name="com.example.kotlinpracticemirea.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fractionInventoryFragment"
-        android:name="com.example.kotlinpracticemirea.FractionInventoryFragment"
+        android:name="com.example.kotlinpracticemirea.fragments.FractionInventoryFragment"
         android:label="fragment_bear"
         tools:layout="@layout/fragment_fraction_inventory" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.example.kotlinpracticemirea.NotesFragment"
+        android:name="com.example.kotlinpracticemirea.fragments.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" />
 </navigation>

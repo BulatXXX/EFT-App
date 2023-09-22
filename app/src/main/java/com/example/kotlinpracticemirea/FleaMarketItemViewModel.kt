@@ -17,4 +17,10 @@ class FleaMarketItemViewModel @Inject constructor(private val repository: FleaMa
 
     val items = repository.allItems.asLiveData()
 
+    fun addItem(fleaMarketItem: FleaMarketItem){
+        viewModelScope.plus(Dispatchers.IO).launch {
+            repository.addItem(fleaMarketItem)
+        }
+    }
+
 }

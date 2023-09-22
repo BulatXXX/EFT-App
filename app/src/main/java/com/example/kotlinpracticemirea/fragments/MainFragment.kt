@@ -1,4 +1,4 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.kotlinpracticemirea.EFTFraction
+import com.example.kotlinpracticemirea.ImageAdapter
+import com.example.kotlinpracticemirea.fragments.MainFragmentDirections
+import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,11 +58,13 @@ class MainFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             when (side) {
                 EFTFraction.PMC_BEAR -> {
-                    val action = MainFragmentDirections.actionMainFragmentToBearFragment(fraction = false)
+                    val action =
+                        MainFragmentDirections.actionMainFragmentToBearFragment(fraction = false)
                     Navigation.findNavController(requireView()).navigate(action)
                 }
                 EFTFraction.PMC_USEC -> {
-                    val action = MainFragmentDirections.actionMainFragmentToBearFragment(fraction = true)
+                    val action =
+                        MainFragmentDirections.actionMainFragmentToBearFragment(fraction = true)
                     Navigation.findNavController(requireView()).navigate(action)
                 }
                 else -> {

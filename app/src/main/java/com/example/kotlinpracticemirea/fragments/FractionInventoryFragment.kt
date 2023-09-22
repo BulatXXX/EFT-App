@@ -1,21 +1,22 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.fragments
 
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.kotlinpracticemirea.*
+import com.example.kotlinpracticemirea.fragments.FractionInventoryFragmentArgs
+import com.example.kotlinpracticemirea.fragments.FractionInventoryFragmentDirections
 
 import com.example.kotlinpracticemirea.databinding.FragmentFractionInventoryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,8 @@ class FractionInventoryFragment : Fragment() {
 
 
         binding.imageView.setOnClickListener {
-            val action = FractionInventoryFragmentDirections.actionFractionInventoryFragmentToNotesFragment()
+            val action =
+                FractionInventoryFragmentDirections.actionFractionInventoryFragmentToNotesFragment()
             Navigation.findNavController(requireView()).navigate(action)
         }
     }
@@ -70,20 +72,20 @@ class FractionInventoryFragment : Fragment() {
         var itemsList = listOf<String>()
         val imageList = ArrayList<Int>()
         val itemsIcons = listOf(
-            R.drawable.knife_icon_w ,
-            R.drawable.tactical_rig_icon_w ,
-            R.drawable.tactical_rig_icon_w ,
-            R.drawable.tactical_rig_icon_w ,
-            R.drawable.tactical_rig_icon_w ,
-            R.drawable.weapon_icon_w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.weapon_icon_w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.weapon_icon_w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.food_icon_w ,
+            R.drawable.knife_icon_w,
+            R.drawable.tactical_rig_icon_w,
+            R.drawable.tactical_rig_icon_w,
+            R.drawable.tactical_rig_icon_w,
+            R.drawable.tactical_rig_icon_w,
+            R.drawable.weapon_icon_w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.weapon_icon_w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.weapon_icon_w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.food_icon_w,
             R.drawable.food_icon_w
         )
 
@@ -227,24 +229,24 @@ class FractionInventoryFragment : Fragment() {
             "500 000 roubles"
         )
         val iconsList = listOf(
-            R.drawable.tactical_rig_icon_w ,
-            R.drawable.armor_icon_w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.icon_ammunition__w ,
-            R.drawable.food_icon_w ,
-            R.drawable.food_icon_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.material_icon_w ,
-            R.drawable.tactical_rig_icon_w ,
-            R.drawable.icon_plus_sign_w ,
-            R.drawable.material_icon_w ,
-            R.drawable.material_icon_w ,
+            R.drawable.tactical_rig_icon_w,
+            R.drawable.armor_icon_w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.icon_ammunition__w,
+            R.drawable.food_icon_w,
+            R.drawable.food_icon_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.material_icon_w,
+            R.drawable.tactical_rig_icon_w,
+            R.drawable.icon_plus_sign_w,
+            R.drawable.material_icon_w,
+            R.drawable.material_icon_w,
             R.drawable.money_icon_w
         )
         val adapter = EquipmentRecyclerViewAdapter(itemsList , iconsList)
