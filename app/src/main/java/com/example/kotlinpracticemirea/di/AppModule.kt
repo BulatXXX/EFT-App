@@ -1,10 +1,9 @@
 package com.example.kotlinpracticemirea.di
 
 import android.app.Application
-import android.app.SharedElementCallback
 import androidx.room.Room
-import com.example.kotlinpracticemirea.FleaMarketDao
-import com.example.kotlinpracticemirea.FleaMarketDatabase
+import com.example.kotlinpracticemirea.room.FleaMarketDao
+import com.example.kotlinpracticemirea.room.FleaMarketDatabase
 import com.example.kotlinpracticemirea.FleaMarketItemRepository
 import dagger.Module
 import dagger.Provides

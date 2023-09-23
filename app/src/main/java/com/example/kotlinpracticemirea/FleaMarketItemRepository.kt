@@ -1,7 +1,7 @@
 package com.example.kotlinpracticemirea
 
-import androidx.lifecycle.LiveData
-import kotlinx.coroutines.flow.Flow
+import com.example.kotlinpracticemirea.room.FleaMarketDao
+import com.example.kotlinpracticemirea.room.FleaMarketItem
 
 import javax.inject.Inject
 

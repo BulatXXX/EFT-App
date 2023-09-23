@@ -15,7 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kotlinpracticemirea.FleaMarketItem
+import com.example.kotlinpracticemirea.room.FleaMarketItem
 import com.example.kotlinpracticemirea.FleaMarketItemAdapter
 import com.example.kotlinpracticemirea.FleaMarketItemViewModel
 import com.example.kotlinpracticemirea.R

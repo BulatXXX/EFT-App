@@ -1,10 +1,9 @@
 package com.example.kotlinpracticemirea
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
+import com.example.kotlinpracticemirea.room.FleaMarketItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

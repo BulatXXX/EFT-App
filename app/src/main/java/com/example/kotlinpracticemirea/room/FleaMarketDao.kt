@@ -1,4 +1,4 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.room
 
 
 import androidx.room.*
