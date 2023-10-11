@@ -16,15 +16,16 @@ import androidx.navigation.Navigation
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpracticemirea.room.FleaMarketItem
-import com.example.kotlinpracticemirea.FleaMarketItemAdapter
+import com.example.kotlinpracticemirea.adapters.FleaMarketItemAdapter
 import com.example.kotlinpracticemirea.FleaMarketItemViewModel
 import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.AddNoteCustomDialogBinding
 import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class NotesFragment : Fragment() {
+class NotesFragment  : Fragment() {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
 

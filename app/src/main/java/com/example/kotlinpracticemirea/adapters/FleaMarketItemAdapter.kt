@@ -1,4 +1,4 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

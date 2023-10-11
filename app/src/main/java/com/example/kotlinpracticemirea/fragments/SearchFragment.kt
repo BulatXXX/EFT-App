@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpracticemirea.Item
 import com.example.kotlinpracticemirea.R
-import com.example.kotlinpracticemirea.RetrofitInstance
+
 import com.example.kotlinpracticemirea.SearchItemAdapter
 import com.example.kotlinpracticemirea.databinding.FragmentSearchBinding
 import retrofit2.HttpException
@@ -34,19 +34,7 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         val adapter = SearchItemAdapter(this)
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getItems("ak-74")
-            } catch (e: IOException) {
-                return@launchWhenCreated
-            }
-            catch (e:HttpException){
-                return@launchWhenCreated
-            }
-            if(response.isSuccessful){
-                adapter.submitList(response.body())
-            }
-        }
+
         binding.searchList.adapter = adapter
         binding.searchList.layoutManager =
             LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false)
