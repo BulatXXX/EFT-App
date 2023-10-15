@@ -23,7 +23,7 @@
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/armor_icon_w" />
+            app:srcCompat="@drawable/knife_icon_w" />
 
         <TextView
             android:id="@+id/name"
@@ -33,7 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16sp"
             android:layout_marginTop="0dp"
-
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/icon"
             app:layout_constraintStart_toEndOf="@+id/icon"
             app:layout_constraintTop_toTopOf="@+id/icon" />

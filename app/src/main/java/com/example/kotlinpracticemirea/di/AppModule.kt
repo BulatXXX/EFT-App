@@ -5,8 +5,9 @@ import androidx.room.Room
 import com.example.kotlinpracticemirea.room.FleaMarketDao
 import com.example.kotlinpracticemirea.room.FleaMarketDatabase
 import com.example.kotlinpracticemirea.FleaMarketItemRepository
-import com.example.retrofit.ItemApi
-import com.example.retrofit.ItemInstance
+import com.example.kotlinpracticemirea.ItemRepository
+import com.example.kotlinpracticemirea.retrofit.ItemApi
+import com.example.kotlinpracticemirea.retrofit.ItemInstance
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +41,10 @@ object AppModule {
     @Singleton
     fun provideRepository(dao: FleaMarketDao) = FleaMarketItemRepository(dao)
 
+    @Provides
+    @Singleton
+    fun provideItemRepository() = ItemRepository()
+
     @ApplicationScope
     @Provides
     @Singleton
@@ -47,7 +52,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitInstance(): ItemApi{
+    fun provideRetrofitInstance(): ItemApi {
         val ItemService: ItemApi by lazy {
             Retrofit
                 .Builder()

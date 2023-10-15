@@ -1,4 +1,4 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.adapters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -9,8 +9,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlinpracticemirea.Item
+import com.example.kotlinpracticemirea.R
 
 import com.example.kotlinpracticemirea.databinding.SearchItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 
@@ -19,12 +24,12 @@ class SearchItemAdapter(private val listener: Listener) :
     ListAdapter<Item , SearchItemAdapter.SearchItemHolder>(DiffCallback()) {
     class SearchItemHolder(private val binding: SearchItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item,listener: Listener) {
+        fun bind(item: Item , listener: Listener) {
             binding.icon.setImageResource(R.drawable.knife_icon_w)
-            val executor = Executors.newSingleThreadExecutor()
+
             val handler = Handler(Looper.getMainLooper())
             var image:Bitmap? = null
-            executor.execute{
+            CoroutineScope(Dispatchers.IO).launch{
                 val iconUrl = item.iconLink
                 try {
                     val inputStream = java.net.URL(iconUrl).openStream()
@@ -38,6 +43,7 @@ class SearchItemAdapter(private val listener: Listener) :
             }
 
             binding.name.text = item.name
+            binding.name.isSelected = true
             binding.parentConstraint.setOnClickListener {
                 listener.OnClick(item)
             }

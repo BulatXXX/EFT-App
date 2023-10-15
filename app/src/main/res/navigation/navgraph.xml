@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/itemFragment">
+    app:startDestination="@id/searchFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -45,5 +45,9 @@
         android:id="@+id/itemFragment"
         android:name="com.example.kotlinpracticemirea.fragments.ItemFragment"
         android:label="fragment_item"
-        tools:layout="@layout/fragment_item" />
+        tools:layout="@layout/fragment_item" >
+        <argument
+            android:name="item"
+            app:argType="com.example.kotlinpracticemirea.Item" />
+    </fragment>
 </navigation>

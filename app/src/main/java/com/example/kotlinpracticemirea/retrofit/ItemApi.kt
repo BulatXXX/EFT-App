@@ -1,4 +1,4 @@
-package com.example.retrofit
+package com.example.kotlinpracticemirea.retrofit
 
 import com.example.kotlinpracticemirea.Item
 import retrofit2.Response

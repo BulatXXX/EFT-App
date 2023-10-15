@@ -14,8 +14,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.kotlinpracticemirea.EFTFraction
-import com.example.kotlinpracticemirea.ImageAdapter
-import com.example.kotlinpracticemirea.fragments.MainFragmentDirections
+import com.example.kotlinpracticemirea.adapters.ImageAdapter
 import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint

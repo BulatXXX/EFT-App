@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.kotlinpracticemirea.*
 import com.example.kotlinpracticemirea.adapters.EquipmentRecyclerViewAdapter
+import com.example.kotlinpracticemirea.adapters.ImageAdapter
 
 import com.example.kotlinpracticemirea.databinding.FragmentFractionInventoryBinding
 import dagger.hilt.android.AndroidEntryPoint
