@@ -3,19 +3,24 @@ package com.example.kotlinpracticemirea
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 data class ItemData(val items: List<Item>)
 data class ResponseData(val data: ItemData)
+@Entity(tableName = "items")
 data class Item(
     val name: String? ,
     val avg24hPrice: Int = 0 ,
     val description: String? = "" ,
     val height: Int = 0 ,
     val iconLink: String? = "https://assets.tarkov.dev/5bf3e03b0db834001d2c4a9c-icon.webp" ,
-    val id: String? = "" ,
+    @PrimaryKey
+    @NonNull
+    val id: String="",
     val image512pxLink: String? = "" ,
-    val width: Int = 0 ,
-    val isFavourite: Int = 0
+    val width: Int = 0
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -24,10 +29,9 @@ data class Item(
         parcel.readString() ,
         parcel.readInt() ,
         parcel.readString() ,
-        parcel.readString() ,
+        parcel.readString().toString() ,
         parcel.readString() ,
         parcel.readInt() ,
-        parcel.readInt()
     ) {
     }
 

@@ -49,5 +49,8 @@
         <argument
             android:name="item"
             app:argType="com.example.kotlinpracticemirea.Item" />
+        <action
+            android:id="@+id/action_itemFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
     </fragment>
 </navigation>

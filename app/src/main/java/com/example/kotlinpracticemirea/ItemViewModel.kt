@@ -24,7 +24,10 @@ import javax.inject.Inject
 class ItemViewModel @Inject constructor(private val repository: ItemRepository) :
     ViewModel() {
     val foundItems = repository.foundItems
-    var searchJob: Job? = null
+    private var searchJob: Job? = null
+    private var favouriteJob: Job? = null
+    val favouriteItems = repository.favouriteItems.asLiveData()
+    var selectedItem = repository.selectedItem
     fun searchItem(name: String) {
         searchJob?.cancel()
         searchJob = viewModelScope.plus(Dispatchers.IO).launch {
@@ -33,12 +36,25 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
             repository.getItemsListFromApi(name)
         }
     }
-    fun addToFavourites(){
+    fun addToFavourites(item: Item){
+        viewModelScope.plus(Dispatchers.IO).launch{
+            repository.addItemToFavourites(item)
+        }
+    }
+    fun deleteFromFavourites(item: Item){
+        viewModelScope.plus(Dispatchers.IO).launch{
+            repository.deleteItemFromFavourites(item)
+        }
+    }
+    fun sendCheckIsFavourite(id: String){
+        favouriteJob = viewModelScope.plus(Dispatchers.IO).launch(){
+            repository.checkIsFavourite(id)
+        }
 
     }
-    fun deleteFromFavourites(){
 
-    }
+
+
 
 
 

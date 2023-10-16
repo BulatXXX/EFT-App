@@ -2,12 +2,13 @@ package com.example.kotlinpracticemirea.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.kotlinpracticemirea.room.FleaMarketDao
+
 import com.example.kotlinpracticemirea.room.FleaMarketDatabase
-import com.example.kotlinpracticemirea.FleaMarketItemRepository
+
 import com.example.kotlinpracticemirea.ItemRepository
 import com.example.kotlinpracticemirea.retrofit.ItemApi
 import com.example.kotlinpracticemirea.retrofit.ItemInstance
+import com.example.kotlinpracticemirea.room.ItemDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,15 +36,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDao(db: FleaMarketDatabase) = db.fleaMarketDao()
+    fun provideDao(db: FleaMarketDatabase) = db.itemDao()
+
+
 
     @Provides
     @Singleton
-    fun provideRepository(dao: FleaMarketDao) = FleaMarketItemRepository(dao)
-
-    @Provides
-    @Singleton
-    fun provideItemRepository() = ItemRepository()
+    fun provideItemRepository(dao: ItemDao) = ItemRepository(dao)
 
     @ApplicationScope
     @Provides

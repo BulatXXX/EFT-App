@@ -61,29 +61,48 @@ class ItemFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
 
+
         binding.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
+        }
+        binding.itemImage.setOnClickListener {
+            val action = ItemFragmentDirections.actionItemFragmentToNotesFragment()
+            Navigation.findNavController(requireView()).navigate(action)
         }
         binding.likeButton.setOnClickListener {
             if (!isFavourite) {
                 binding.likeButton.setImageResource(R.drawable.like_red)
                 isFavourite = !isFavourite
-                itemViewModel.addToFavourites()
+                itemViewModel.addToFavourites(args.item)
             }else{
-                binding.likeButton.setImageResource(R.drawable.like_white)
+                itemViewModel.deleteFromFavourites(args.item)
                 isFavourite = !isFavourite
-                itemViewModel.deleteFromFavourites()
+                binding.likeButton.setImageResource(R.drawable.like_white)
             }
         }
 
-        checkIsFavourite(args.item.id)
+        itemViewModel.selectedItem.observe(viewLifecycleOwner){
+            if (it==args.item.id){
+                binding.likeButton.setImageResource(R.drawable.like_red)
+                isFavourite = !isFavourite
+            }else{
+                binding.likeButton.setImageResource(R.drawable.like_white)
+                isFavourite = !isFavourite
+            }
+        }
+        //checkIsFavourite(args.item.id)
         setUpInterface(args.item)
+
+
 
 
     }
 
     private fun checkIsFavourite(id: String?) {
-        ///////
+        if (id != null) {
+            itemViewModel.sendCheckIsFavourite(id)
+        }
+
     }
 
     private fun setUpInterface(item: Item) {
@@ -91,12 +110,11 @@ class ItemFragment : Fragment() {
         binding.itemName.text = item.name
         binding.itemDescription.text = item.description
 
-        if (isFavourite) binding.likeButton.setImageResource(R.drawable.like_red)
-        else binding.likeButton.setImageResource(R.drawable.like_white)
+
 
         val price = item.avg24hPrice
         if (price == 0) {
-            binding.itemPrice.text = "Item can't be bought on flea market!"
+            binding.itemPrice.text = "Item can't be bought at a flea market!"
             binding.itemPrice.setTextColor(Color.RED)
         } else binding.itemPrice.text = price.toString() + " ROUBLES"
         val handler = Handler(Looper.getMainLooper())

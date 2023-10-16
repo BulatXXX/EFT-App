@@ -2,19 +2,25 @@ package com.example.kotlinpracticemirea
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.example.kotlinpracticemirea.room.FleaMarketItem
 import com.example.kotlinpracticemirea.retrofit.ItemApi
 import com.example.kotlinpracticemirea.retrofit.ItemInstance
+
+import com.example.kotlinpracticemirea.room.ItemDao
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import javax.inject.Inject
 
-class ItemRepository() {
+class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
+    var favouriteItems = itemDao.getAllItems()
 
     private val listOfFoundItems = MutableLiveData<List<Item>>(emptyList())
+    var selectedItem = MutableLiveData<String>()
 
     val foundItems: MutableLiveData<List<Item>>
         get() = listOfFoundItems
@@ -55,15 +61,21 @@ class ItemRepository() {
 
     }
 
-    fun addItemToFavourites(item: Item) {
-
+    suspend fun addItemToFavourites(item: Item) {
+        itemDao.addItem(item)
     }
 
     fun getFavouritesList(): List<Item> {
         return emptyList()
     }
 
-    fun deleteItemFromFavourites(item: Item) {
+    suspend fun deleteItemFromFavourites(item: Item) {
+        itemDao.deleteItem(item)
+    }
+
+    fun checkIsFavourite(id: String) {
+        val name = itemDao.getItemById(id).asLiveData().value.toString()
+        selectedItem.postValue(name)
 
     }
 }

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.kotlinpracticemirea.R
 
-@Entity(tableName = "items")
+@Entity()
 data class FleaMarketItem(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null ,
