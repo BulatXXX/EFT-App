@@ -62,6 +62,11 @@ class ItemFragment : Fragment() {
         super.onViewCreated(view , savedInstanceState)
 
 
+        itemViewModel.check(args.item.id) {
+            setUpLike(it);
+            isFavourite = it
+        }
+
         binding.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
         }
@@ -81,7 +86,7 @@ class ItemFragment : Fragment() {
             }
         }
 
-        itemViewModel.selectedItem.observe(viewLifecycleOwner){
+        /*itemViewModel.selectedItem.observe(viewLifecycleOwner){
             if (it==args.item.id){
                 binding.likeButton.setImageResource(R.drawable.like_red)
                 isFavourite = !isFavourite
@@ -89,13 +94,22 @@ class ItemFragment : Fragment() {
                 binding.likeButton.setImageResource(R.drawable.like_white)
                 isFavourite = !isFavourite
             }
-        }
+        }*/
         //checkIsFavourite(args.item.id)
         setUpInterface(args.item)
 
 
 
 
+    }
+
+    private fun setUpLike(isFavourite: Boolean) {
+        if(isFavourite){
+            binding.likeButton.setImageResource(R.drawable.like_red)
+        }
+        else{
+            binding.likeButton.setImageResource(R.drawable.like_white)
+        }
     }
 
     private fun checkIsFavourite(id: String?) {

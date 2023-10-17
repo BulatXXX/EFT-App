@@ -73,9 +73,5 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
         itemDao.deleteItem(item)
     }
 
-    fun checkIsFavourite(id: String) {
-        val name = itemDao.getItemById(id).asLiveData().value.toString()
-        selectedItem.postValue(name)
-
-    }
+    fun checkIsFavourite(id: String):Boolean = itemDao.getItemById(id)!=null
 }

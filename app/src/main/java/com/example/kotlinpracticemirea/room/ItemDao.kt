@@ -20,5 +20,5 @@ interface ItemDao {
     suspend fun deleteItem(item: Item)
 
     @Query("SELECT name FROM items WHERE id = :id")
-    fun getItemById(id: String): Flow<String>
+    fun getItemById(id: String): String?
 }

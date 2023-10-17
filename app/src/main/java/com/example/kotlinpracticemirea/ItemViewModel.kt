@@ -32,7 +32,6 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
         searchJob?.cancel()
         searchJob = viewModelScope.plus(Dispatchers.IO).launch {
             delay(1500)
-
             repository.getItemsListFromApi(name)
         }
     }
@@ -50,8 +49,16 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
         favouriteJob = viewModelScope.plus(Dispatchers.IO).launch(){
             repository.checkIsFavourite(id)
         }
-
     }
+
+    fun check(id: String,result: (Boolean) -> Unit) {
+        viewModelScope.plus(Dispatchers.IO).launch(){
+            val res = repository.checkIsFavourite(id)
+            result.invoke(res)
+        }
+    }
+
+
 
 
 
