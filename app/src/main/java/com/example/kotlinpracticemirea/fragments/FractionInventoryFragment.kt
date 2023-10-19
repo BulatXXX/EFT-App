@@ -52,7 +52,7 @@ class FractionInventoryFragment : Fragment() {
 
         binding.imageView.setOnClickListener {
             val action =
-                FractionInventoryFragmentDirections.actionFractionInventoryFragmentToNotesFragment()
+                FractionInventoryFragmentDirections.actionFractionInventoryFragmentToSearchFragment()
             Navigation.findNavController(requireView()).navigate(action)
         }
     }

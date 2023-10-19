@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kotlinpracticemirea.Item
 import com.example.kotlinpracticemirea.ItemViewModel
 import com.example.kotlinpracticemirea.room.FleaMarketItem
 import com.example.kotlinpracticemirea.adapters.FleaMarketItemAdapter
@@ -26,13 +27,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class NotesFragment : Fragment() {
+class NotesFragment : Fragment(),FleaMarketItemAdapter.Listener {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
 
 
     private val itemViewModel: ItemViewModel by viewModels()
-    private val adapter = FleaMarketItemAdapter()
+    private val adapter = FleaMarketItemAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -54,5 +55,13 @@ class NotesFragment : Fragment() {
             adapter.submitList(it)
             binding.rv.adapter = adapter
         }
+        binding.backBtn.setOnClickListener {
+            Navigation.findNavController(requireView()).popBackStack()
+        }
+    }
+
+    override fun OnClick(item: Item) {
+        val action = NotesFragmentDirections.actionNotesFragmentToItemFragment(item)
+        Navigation.findNavController(requireView()).navigate(action)
     }
 }

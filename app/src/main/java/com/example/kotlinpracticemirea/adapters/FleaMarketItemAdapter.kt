@@ -1,22 +1,55 @@
 package com.example.kotlinpracticemirea.adapters
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinpracticemirea.Item
 import com.example.kotlinpracticemirea.databinding.FleaMarketItemBinding
 import com.example.kotlinpracticemirea.room.FleaMarketItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class FleaMarketItemAdapter() :
+class FleaMarketItemAdapter(private val listener: Listener) :
     ListAdapter<Item , FleaMarketItemAdapter.FleaMarketItemHolder>(DiffCallback()) {
     class FleaMarketItemHolder(private val binding: FleaMarketItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item) {
+        val handler = Handler(Looper.getMainLooper())
+        var image: Bitmap? = null
+        fun bind(item: Item,listener: Listener) {
             binding.nameItem.text = item.name
            // binding.iconItem.setImageResource(item.image512pxLink)
-            binding.priceItem.text = item.avg24hPrice.toString()
+            CoroutineScope(Dispatchers.IO).launch {
+                val iconUrl = item.iconLink
+                        try {
+                            val inputStream = java.net.URL(iconUrl).openStream()
+                            image = BitmapFactory.decodeStream(inputStream)
+
+                            handler.post {
+                                binding.iconItem.setImageBitmap(image)
+                            }
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                        }
+            }
+            binding.nameItem.isSelected = true
+            if(item.avg24hPrice==0){
+                binding.priceItem.isSelected = true
+                binding.priceItem.text = "Item can't be bought at a flea market!"
+                binding.priceItem.setTextColor(android.graphics.Color.RED)
+            }
+            else{
+            binding.priceItem.text = item.avg24hPrice.toString() + " RUB"}
+            binding.item.setOnClickListener{
+                listener.OnClick(item)
+            }
         }
 
     }
@@ -31,7 +64,7 @@ class FleaMarketItemAdapter() :
 
     override fun onBindViewHolder(holder: FleaMarketItemHolder , position: Int) {
         val currentItem = getItem(position)
-        holder.bind(currentItem)
+        holder.bind(currentItem,listener)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Item>() {
@@ -42,5 +75,8 @@ class FleaMarketItemAdapter() :
             oldItem: Item ,
             newItem: Item
         ): Boolean = oldItem == newItem
+    }
+    interface Listener {
+        fun OnClick(item: Item)
     }
 }
