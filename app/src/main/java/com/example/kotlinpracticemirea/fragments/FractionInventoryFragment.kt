@@ -1,5 +1,6 @@
 package com.example.kotlinpracticemirea.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -167,6 +168,10 @@ class FractionInventoryFragment : Fragment() {
         binding.viewpagerGear.clipChildren = false
         binding.viewpagerGear.clipToPadding = false
         binding.viewpagerGear.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_ALWAYS
+        binding.imageView.setOnClickListener {
+            val action = FractionInventoryFragmentDirections.actionFractionInventoryFragmentToSearchFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
 
         setUpTransformer()
         binding.viewpagerGear.registerOnPageChangeCallback(object :

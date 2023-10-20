@@ -1,18 +1,11 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.Item
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import com.example.kotlinpracticemirea.room.FleaMarketItem
-import com.example.kotlinpracticemirea.retrofit.ItemApi
 import com.example.kotlinpracticemirea.retrofit.ItemInstance
 
 import com.example.kotlinpracticemirea.room.ItemDao
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import javax.inject.Inject
 

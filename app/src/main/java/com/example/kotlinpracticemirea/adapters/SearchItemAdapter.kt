@@ -9,15 +9,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinpracticemirea.Item
+import com.example.kotlinpracticemirea.Item.Item
 import com.example.kotlinpracticemirea.R
 
 import com.example.kotlinpracticemirea.databinding.SearchItemBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
-
 
 
 class SearchItemAdapter(private val listener: Listener) :

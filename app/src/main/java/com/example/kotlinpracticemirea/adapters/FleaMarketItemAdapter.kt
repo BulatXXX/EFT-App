@@ -6,13 +6,11 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinpracticemirea.Item
+import com.example.kotlinpracticemirea.Item.Item
 import com.example.kotlinpracticemirea.databinding.FleaMarketItemBinding
-import com.example.kotlinpracticemirea.room.FleaMarketItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +21,7 @@ class FleaMarketItemAdapter(private val listener: Listener) :
         RecyclerView.ViewHolder(binding.root) {
         val handler = Handler(Looper.getMainLooper())
         var image: Bitmap? = null
-        fun bind(item: Item,listener: Listener) {
+        fun bind(item: Item , listener: Listener) {
             binding.nameItem.text = item.name
            // binding.iconItem.setImageResource(item.image512pxLink)
             CoroutineScope(Dispatchers.IO).launch {

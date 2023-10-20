@@ -2,29 +2,21 @@ package com.example.kotlinpracticemirea.fragments
 
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.Toast
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kotlinpracticemirea.Item
-import com.example.kotlinpracticemirea.ItemViewModel
-import com.example.kotlinpracticemirea.room.FleaMarketItem
+import com.example.kotlinpracticemirea.Item.Item
+import com.example.kotlinpracticemirea.Item.ItemViewModel
 import com.example.kotlinpracticemirea.adapters.FleaMarketItemAdapter
 
-import com.example.kotlinpracticemirea.R
-import com.example.kotlinpracticemirea.databinding.AddNoteCustomDialogBinding
 import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotesFragment : Fragment(),FleaMarketItemAdapter.Listener {

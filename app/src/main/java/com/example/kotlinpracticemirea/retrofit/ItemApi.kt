@@ -1,6 +1,5 @@
 package com.example.kotlinpracticemirea.retrofit
 
-import com.example.kotlinpracticemirea.Item
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers

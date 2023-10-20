@@ -1,6 +1,5 @@
-package com.example.kotlinpracticemirea
+package com.example.kotlinpracticemirea.Item
 
-import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.annotation.NonNull

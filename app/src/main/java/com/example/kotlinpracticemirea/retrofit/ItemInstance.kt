@@ -14,7 +14,6 @@ object ItemInstance {
                 .Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
-                //.addConverterFactory(GsonConverterFactory.create())
                 .build().create(ItemApi::class.java)
         }
 
