@@ -72,6 +72,10 @@ class MainFragment : Fragment() {
             }
 
         }
+        binding.chooseYourSideTextView.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToLinkFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
     }
 
     private fun initViewPager() {

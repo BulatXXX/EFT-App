@@ -23,29 +23,29 @@ class FleaMarketItemAdapter(private val listener: Listener) :
         var image: Bitmap? = null
         fun bind(item: Item , listener: Listener) {
             binding.nameItem.text = item.name
-           // binding.iconItem.setImageResource(item.image512pxLink)
+            // binding.iconItem.setImageResource(item.image512pxLink)
             CoroutineScope(Dispatchers.IO).launch {
                 val iconUrl = item.iconLink
-                        try {
-                            val inputStream = java.net.URL(iconUrl).openStream()
-                            image = BitmapFactory.decodeStream(inputStream)
+                try {
+                    val inputStream = java.net.URL(iconUrl).openStream()
+                    image = BitmapFactory.decodeStream(inputStream)
 
-                            handler.post {
-                                binding.iconItem.setImageBitmap(image)
-                            }
-                        }catch (e:Exception){
-                            e.printStackTrace()
-                        }
+                    handler.post {
+                        binding.iconItem.setImageBitmap(image)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
             binding.nameItem.isSelected = true
-            if(item.avg24hPrice==0){
+            if (item.avg24hPrice == 0) {
                 binding.priceItem.isSelected = true
                 binding.priceItem.text = "Item can't be bought at a flea market!"
                 binding.priceItem.setTextColor(android.graphics.Color.RED)
+            } else {
+                binding.priceItem.text = item.avg24hPrice.toString() + " RUB"
             }
-            else{
-            binding.priceItem.text = item.avg24hPrice.toString() + " RUB"}
-            binding.item.setOnClickListener{
+            binding.item.setOnClickListener {
                 listener.OnClick(item)
             }
         }
@@ -62,7 +62,7 @@ class FleaMarketItemAdapter(private val listener: Listener) :
 
     override fun onBindViewHolder(holder: FleaMarketItemHolder , position: Int) {
         val currentItem = getItem(position)
-        holder.bind(currentItem,listener)
+        holder.bind(currentItem , listener)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Item>() {
@@ -74,6 +74,7 @@ class FleaMarketItemAdapter(private val listener: Listener) :
             newItem: Item
         ): Boolean = oldItem == newItem
     }
+
     interface Listener {
         fun OnClick(item: Item)
     }

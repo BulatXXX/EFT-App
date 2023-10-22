@@ -127,11 +127,12 @@ class ItemFragment : Fragment() {
     }
 
     private fun loadImage(item: Item) {
+        binding.pb.isVisible = true
         val handler = Handler(Looper.getMainLooper())
         var image: Bitmap? = null
-        val fixedThreadPoolDispatcher =
+        val dispatcher =
             newSingleThreadContext("Network")
-        CoroutineScope(fixedThreadPoolDispatcher).launch {
+        CoroutineScope(dispatcher).launch {
             val imageUrl = item.image512pxLink
             try {
                 val inputStream = URL(imageUrl).openStream()
@@ -143,14 +144,14 @@ class ItemFragment : Fragment() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            fixedThreadPoolDispatcher.close()
+            dispatcher.close()
         }
     }
 
     private fun saveToGallery(context: Context , bitmap: Bitmap , albumName: String = "Tarkov_App") {
-        val fixedThreadPoolDispatcher =
+        val dispatcher =
             newSingleThreadContext("Disk")
-        CoroutineScope(fixedThreadPoolDispatcher).launch {
+        CoroutineScope(dispatcher).launch {
             val filename = "${System.currentTimeMillis()}.png"
             val write: (OutputStream) -> Boolean = {
                 bitmap.compress(Bitmap.CompressFormat.PNG , 100 , it)
@@ -184,7 +185,7 @@ class ItemFragment : Fragment() {
                 write(FileOutputStream(image))
             }
         }
-        fixedThreadPoolDispatcher.close()
+        dispatcher.close()
     }
 
 

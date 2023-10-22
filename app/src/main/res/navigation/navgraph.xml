@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_bearFragment"
             app:destination="@id/fractionInventoryFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_linkFragment"
+            app:destination="@id/linkFragment" />
     </fragment>
     <fragment
         android:id="@+id/fractionInventoryFragment"
@@ -57,4 +60,9 @@
             android:name="item"
             app:argType="com.example.kotlinpracticemirea.Item.Item" />
     </fragment>
+    <fragment
+        android:id="@+id/linkFragment"
+        android:name="com.example.kotlinpracticemirea.fragments.LinkFragment"
+        android:label="fragment_link"
+        tools:layout="@layout/fragment_link" />
 </navigation>
