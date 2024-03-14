@@ -3,33 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/searchFragment">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_bearFragment"
-            app:destination="@id/fractionInventoryFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_linkFragment"
-            app:destination="@id/linkFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/fractionInventoryFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.FractionInventoryFragment"
-        android:label="fragment_bear"
-        tools:layout="@layout/fragment_fraction_inventory" >
-        <argument
-            android:name="fraction"
-            app:argType="boolean"
-            android:defaultValue="false" />
-        <action
-            android:id="@+id/action_fractionInventoryFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-    </fragment>
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.example.kotlinpracticemirea.fragments.NotesFragment"
@@ -60,9 +35,4 @@
             android:name="item"
             app:argType="com.example.kotlinpracticemirea.Item.Item" />
     </fragment>
-    <fragment
-        android:id="@+id/linkFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.LinkFragment"
-        android:label="fragment_link"
-        tools:layout="@layout/fragment_link" />
 </navigation>
