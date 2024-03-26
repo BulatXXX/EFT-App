@@ -16,7 +16,6 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
     ViewModel() {
     val foundItems = repository.foundItems
     private var searchJob: Job? = null
-    private var favouriteJob: Job? = null
     val favouriteItems = repository.favouriteItems.asLiveData()
 
     fun searchItem(name: String) {
@@ -26,34 +25,31 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
             repository.getItemsListFromApi(name)
         }
     }
-    fun addToFavourites(item: Item){
-        viewModelScope.plus(Dispatchers.IO).launch{
+
+    fun clearSearchBar() {
+        searchJob?.cancel()
+        searchJob = null
+        foundItems.value = emptyList()
+    }
+
+    fun addToFavourites(item: Item) {
+        viewModelScope.plus(Dispatchers.IO).launch {
             repository.addItemToFavourites(item)
         }
     }
-    fun deleteFromFavourites(item: Item){
-        viewModelScope.plus(Dispatchers.IO).launch{
+
+    fun deleteFromFavourites(item: Item) {
+        viewModelScope.plus(Dispatchers.IO).launch {
             repository.deleteItemFromFavourites(item)
         }
     }
-    fun sendCheckIsFavourite(id: String){
-        favouriteJob = viewModelScope.plus(Dispatchers.IO).launch(){
-            repository.checkIsFavourite(id)
-        }
-    }
 
-    fun check(id: String,result: (Boolean) -> Unit) {
-        viewModelScope.plus(Dispatchers.IO).launch(){
+    fun check(id: String , result: (Boolean) -> Unit) {
+        viewModelScope.plus(Dispatchers.IO).launch() {
             val res = repository.checkIsFavourite(id)
             result.invoke(res)
         }
     }
-
-
-
-
-
-
 
 
 }

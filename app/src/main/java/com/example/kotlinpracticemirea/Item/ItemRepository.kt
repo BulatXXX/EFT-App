@@ -13,14 +13,8 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
     var favouriteItems = itemDao.getAllItems()
 
     private val listOfFoundItems = MutableLiveData<List<Item>>(emptyList())
-    var selectedItem = MutableLiveData<String>()
-
     val foundItems: MutableLiveData<List<Item>>
         get() = listOfFoundItems
-
-
-
-
 
 
     suspend fun getItemsListFromApi(name: String) {
@@ -45,8 +39,6 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
             val responseData = gson.fromJson(responseBody , ResponseData::class.java)
             val items = responseData.data.items
             foundItems.postValue(items)
-
-
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -56,10 +48,6 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
 
     suspend fun addItemToFavourites(item: Item) {
         itemDao.addItem(item)
-    }
-
-    fun getFavouritesList(): List<Item> {
-        return emptyList()
     }
 
     suspend fun deleteItemFromFavourites(item: Item) {

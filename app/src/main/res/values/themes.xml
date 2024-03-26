@@ -3,6 +3,7 @@
     <style name="Theme.KotlinPracticeMIREA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="textFillColor">@color/black</item>
+
         <!-- Secondary brand color. -->
         <!-- Status bar color. -->
         <item name="backgroundColor">@color/sand_color</item>
