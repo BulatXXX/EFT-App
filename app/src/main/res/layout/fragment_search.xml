@@ -10,9 +10,11 @@
     <EditText
         android:id="@+id/searchBar"
         style="@style/RegularEditText"
+        android:saveEnabled="true"
+
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:hint="Item name"
+        android:hint="@string/item_name"
         android:textColor="?attr/textFillColor"
         android:textColorHint="@color/grey"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,18 +3,16 @@ package com.example.kotlinpracticemirea.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlinpracticemirea.Item.Item
 import com.example.kotlinpracticemirea.Item.ItemViewModel
 import com.example.kotlinpracticemirea.adapters.FleaMarketItemAdapter
-
 import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,9 +45,11 @@ class NotesFragment : Fragment(),FleaMarketItemAdapter.Listener {
             adapter.submitList(it)
             binding.rv.adapter = adapter
         }
+
         binding.backBtn.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
         }
+
     }
 
     override fun OnClick(item: Item) {
