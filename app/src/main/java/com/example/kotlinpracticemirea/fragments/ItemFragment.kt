@@ -27,7 +27,9 @@ import com.example.kotlinpracticemirea.Item.ItemViewModel
 import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentItemBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -46,16 +48,13 @@ class ItemFragment : Fragment() {
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
     ): View {
-       
         _binding = FragmentItemBinding.inflate(layoutInflater , container , false)
-
 
         return binding.root
     }
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-
 
         itemViewModel.check(args.item.id) {
             setUpLike(it);
@@ -91,7 +90,6 @@ class ItemFragment : Fragment() {
         setUpInterface(args.item)
 
 
-
     }
 
 
@@ -103,18 +101,11 @@ class ItemFragment : Fragment() {
         }
     }
 
-    private fun checkIsFavourite(id: String?) {
-        if (id != null) {
-            itemViewModel.sendCheckIsFavourite(id)
-        }
-
-    }
 
     private fun setUpInterface(item: Item) {
         binding.pb.isVisible = true
         binding.itemName.text = item.name
         binding.itemDescription.text = item.description
-
 
         val price = item.avg24hPrice
         if (price == 0) {
@@ -139,6 +130,7 @@ class ItemFragment : Fragment() {
                 image = BitmapFactory.decodeStream(inputStream)
                 handler.post {
                     binding.itemImage.setImageBitmap(image)
+                    binding.itemImage.isVisible = true
                     binding.pb.isVisible = false
                 }
             } catch (e: Exception) {

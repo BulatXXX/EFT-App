@@ -6,13 +6,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginVertical="16dp"
-    android:background="@color/black">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="720dp"
         android:layout_height="wrap_content"
-        android:background="@color/black"
+
         app:layout_constraintStart_toStartOf="@id/parentConstraint"
         app:layout_constraintTop_toTopOf="@id/parentConstraint">
 
@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/name"
             style="@style/RegularText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:singleLine="true"
             android:layout_height="wrap_content"
             android:layout_marginStart="16sp"
@@ -42,7 +42,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.divider.MaterialDivider
-        android:layout_width="wrap_content"
+        android:layout_width="720dp"
         android:layout_height="wrap_content"
         app:dividerColor="@color/grey"
         android:layout_marginTop="4dp"
