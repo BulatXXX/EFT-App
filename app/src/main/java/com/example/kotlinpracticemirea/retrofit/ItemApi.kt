@@ -9,9 +9,4 @@ interface ItemApi {
     @Headers("Content-Type: application/json")
     @POST("/")
     suspend fun getItems(@Body body: String): Response<String>
-
-    @Headers("Content-Type: application/json")
-    @POST("/")
-    suspend fun getItem(@Body body: String): Response<String>
-
 }

@@ -60,8 +60,8 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
 
         //Функция очистки списка для практики
         binding.searchIcon.setOnLongClickListener {
-            practModeIsOn=!practModeIsOn
-            Toast.makeText(context,"Pract mode = $practModeIsOn",Toast.LENGTH_SHORT).show()
+            practModeIsOn = !practModeIsOn
+            Toast.makeText(context , "Pract mode = $practModeIsOn" , Toast.LENGTH_SHORT).show()
             true
         }
 
@@ -80,10 +80,29 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
             var items = it
             if (items.size > 10) {
                 items = items.subList(0 , 10)
+                binding.noItemsFoundTV.isVisible = false
+            }
+            if (items.isEmpty() && binding.searchBar.text.isNotEmpty()) {
+                binding.noItemsFoundTV.isVisible = true
             }
 
             adapter.submitList(items)
             binding.pb.isVisible = false
+
+        }
+
+        binding.refreshBtn.setOnClickListener {
+            itemViewModel.searchItem(binding.searchBar.text.toString())
+            binding.pb.isVisible = true
+            binding.refreshBtn.isVisible = false
+        }
+
+        itemViewModel.isResponseSuccessful.observe(viewLifecycleOwner) {
+            if (!it) {
+                binding.refreshBtn.isVisible = true
+                binding.pb.isVisible = false
+                adapter.submitList(emptyList())
+            }
         }
 
 
@@ -94,8 +113,18 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
                 if (practModeIsOn) binding.searchIcon.isVisible =
                     if (s?.length == 0) false else true
 
-                itemViewModel.searchItem(s.toString())
-                binding.pb.isVisible = true
+                if (s?.length != 0) {
+                    itemViewModel.searchItem(s.toString())
+                    binding.pb.isVisible = true
+                    binding.refreshBtn.isVisible = false
+                    binding.noItemsFoundTV.isVisible = false
+                } else {
+                    itemViewModel.searchJob?.cancel()
+
+                    binding.pb.isVisible = false
+                    binding.noItemsFoundTV.isVisible = false
+                    adapter.submitList(emptyList())
+                }
             }
 
             override fun beforeTextChanged(
@@ -116,20 +145,20 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
         val action = SearchFragmentDirections.actionSearchFragmentToItemFragment(item)
         Navigation.findNavController(requireView()).navigate(action)
     }
-/*
-    private val SAVED_TEXT_TAG = "SAVED_TEXT"
+    /*
+        private val SAVED_TEXT_TAG = "SAVED_TEXT"
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(SAVED_TEXT_TAG, binding.searchBar.text.toString())
-    }
+        override fun onSaveInstanceState(outState: Bundle) {
+            super.onSaveInstanceState(outState)
+            outState.putString(SAVED_TEXT_TAG, binding.searchBar.text.toString())
+        }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        binding.searchBar.setText(savedInstanceState?.getString(SAVED_TEXT_TAG))
-    }
+        override fun onViewStateRestored(savedInstanceState: Bundle?) {
+            super.onViewStateRestored(savedInstanceState)
+            binding.searchBar.setText(savedInstanceState?.getString(SAVED_TEXT_TAG))
+        }
 
- */
+     */
 }
 
 

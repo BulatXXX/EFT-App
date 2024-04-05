@@ -16,6 +16,8 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
     val foundItems: MutableLiveData<List<Item>>
         get() = listOfFoundItems
 
+    val isResponseSuccessful: MutableLiveData<Boolean> = MutableLiveData(true)
+
 
     suspend fun getItemsListFromApi(name: String) {
         val paramObject = JSONObject()
@@ -32,6 +34,9 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
 
         try {
             val response = ItemInstance.ItemService.getItems(paramObject.toString())
+
+            isResponseSuccessful.postValue(response.isSuccessful)
+
             var responseBody = response.body().toString()
 
             Log.e("response" , responseBody)
@@ -41,9 +46,8 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
             foundItems.postValue(items)
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
+            isResponseSuccessful.postValue(false)
         }
-
-
     }
 
     suspend fun addItemToFavourites(item: Item) {

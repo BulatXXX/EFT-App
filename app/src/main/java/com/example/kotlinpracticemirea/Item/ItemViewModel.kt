@@ -15,8 +15,10 @@ import javax.inject.Inject
 class ItemViewModel @Inject constructor(private val repository: ItemRepository) :
     ViewModel() {
     val foundItems = repository.foundItems
-    private var searchJob: Job? = null
+    var searchJob: Job? = null
     val favouriteItems = repository.favouriteItems.asLiveData()
+    val isResponseSuccessful = repository.isResponseSuccessful
+
 
     fun searchItem(name: String) {
         searchJob?.cancel()

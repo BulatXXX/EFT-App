@@ -61,6 +61,7 @@ class ItemFragment : Fragment() {
             isFavourite = it
         }
 
+
         binding.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
         }
@@ -85,6 +86,7 @@ class ItemFragment : Fragment() {
             }
             builder.show()
         }
+
 
 
         setUpInterface(args.item)

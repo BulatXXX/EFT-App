@@ -10,11 +10,11 @@
     <EditText
         android:id="@+id/searchBar"
         style="@style/RegularEditText"
-        android:saveEnabled="true"
-
         android:layout_width="280dp"
+
         android:layout_height="wrap_content"
         android:hint="@string/item_name"
+        android:saveEnabled="true"
         android:textColor="?attr/textFillColor"
         android:textColorHint="@color/grey"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/searchBar"
         app:layout_constraintTop_toTopOf="@+id/searchBar" />
 
+
     <ProgressBar
         android:id="@+id/pb"
         android:layout_width="40dp"
@@ -39,6 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchList"
@@ -51,11 +53,37 @@
         app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
     <ImageView
+        android:id="@+id/refreshBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/refresh"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/noItemsFoundTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/geometria_medium"
+        android:text="No Items Found!"
+        android:textColor="?attr/textFillColor"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/favButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/like_white"
         android:layout_margin="20dp"
+        android:src="@drawable/like_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
