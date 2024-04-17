@@ -1,5 +1,7 @@
 package com.example.kotlinpracticemirea.Item
 
+import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,10 +16,20 @@ import javax.inject.Inject
 @HiltViewModel
 class ItemViewModel @Inject constructor(private val repository: ItemRepository) :
     ViewModel() {
+
     val foundItems = repository.foundItems
+
     var searchJob: Job? = null
+
     val favouriteItems = repository.favouriteItems.asLiveData()
+
+    val searchHistoryList = repository.searchHistoryList
+
+    val searchFragmentState = MutableLiveData<SearchFragmentState>(SearchFragmentState.IS_IDLE)
+
+
     val isResponseSuccessful = repository.isResponseSuccessful
+
 
 
     fun searchItem(name: String) {
@@ -53,5 +65,22 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
         }
     }
 
+    fun clearSearchHistory(context: Context){
+        repository.clearSearchHistory(context)
+    }
+    fun saveToSharedPreferences(item: Item , context: Context) {
+        repository.saveToSharedPreferences(item,context)
+    }
+    fun getHistoryList(context: Context){
+        repository.getHistoryList(context)
+    }
 
+
+}
+
+enum class SearchFragmentState(){
+    IS_SHOWING_HISTORY,
+    IS_SHOWING_SEARCH_RESULT,
+    IS_SEARCHING,
+    IS_IDLE
 }

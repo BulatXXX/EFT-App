@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_searchFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
@@ -35,4 +38,9 @@
             android:name="item"
             app:argType="com.example.kotlinpracticemirea.Item.Item" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.kotlinpracticemirea.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

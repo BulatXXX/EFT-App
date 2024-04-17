@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.regex.Pattern
 
 data class ItemData(val items: List<Item>)
 data class ResponseData(val data: ItemData)
@@ -14,7 +15,7 @@ data class Item(
     val avg24hPrice: Int = 0 ,
     val description: String? = "" ,
     val height: Int = 0 ,
-    val iconLink: String? = "https://assets.tarkov.dev/5bf3e03b0db834001d2c4a9c-icon.webp" ,
+    val iconLink: String? = "" ,
     @PrimaryKey
     @NonNull
     val id: String="",
@@ -57,6 +58,30 @@ data class Item(
         override fun newArray(size: Int): Array<Item?> {
             return arrayOfNulls(size)
         }
+        fun fromString(string: String): Item {
+            val pattern = Pattern.compile("Item\\(name=(.*?), avg24hPrice=(\\d+), description=(.*?), height=(\\d+), iconLink=(.*?), id=(.*?), image512pxLink=(.*?), width=(\\d+)\\)")
+            val matcher = pattern.matcher(string)
+            if (matcher.find()) {
+                return Item(
+                    matcher.group(1),
+                    matcher.group(2).toInt(),
+                    matcher.group(3),
+                    matcher.group(4).toInt(),
+                    matcher.group(5),
+                    matcher.group(6),
+                    matcher.group(7),
+                    matcher.group(8).toInt()
+                )
+            } else {
+                throw IllegalArgumentException("Invalid string format")
+            }
+        }
     }
+
+    fun toHistoryString(): String {
+        return "[${name}, ${iconLink}]"
+    }
+
+
 
 }

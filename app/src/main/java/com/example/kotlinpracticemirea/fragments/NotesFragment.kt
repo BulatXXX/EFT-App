@@ -17,7 +17,7 @@ import com.example.kotlinpracticemirea.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotesFragment : Fragment(),FleaMarketItemAdapter.Listener {
+class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
 

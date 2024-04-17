@@ -12,6 +12,7 @@
         style="@style/RegularEditText"
         android:layout_width="720dp"
         android:layout_height="wrap_content"
+
         android:hint="Item name"
         android:textColor="?attr/textFillColor"
         android:textColorHint="@color/grey"

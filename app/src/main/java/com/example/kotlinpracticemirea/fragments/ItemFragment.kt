@@ -53,6 +53,10 @@ class ItemFragment : Fragment() {
         return binding.root
     }
 
+    private fun saveItemToHistory() {
+
+    }
+
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
 
@@ -90,7 +94,7 @@ class ItemFragment : Fragment() {
 
 
         setUpInterface(args.item)
-
+        saveItemToHistory()
 
     }
 
