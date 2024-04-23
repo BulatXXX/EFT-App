@@ -66,6 +66,7 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
     }
 
     fun clearSearchHistory(context: Context){
+        searchHistoryList.value = emptyList()
         repository.clearSearchHistory(context)
     }
     fun saveToSharedPreferences(item: Item , context: Context) {

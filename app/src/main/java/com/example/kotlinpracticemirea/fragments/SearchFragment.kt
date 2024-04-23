@@ -61,12 +61,14 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
         itemViewModel.searchFragmentState.observe(viewLifecycleOwner) {
             when (it) {
                 SearchFragmentState.IS_SHOWING_HISTORY -> {
+                 
                     itemViewModel.getHistoryList(requireContext())
                     adapter.submitList(itemViewModel.searchHistoryList.value)
                     binding.searchIcon.setImageResource(R.drawable.trash)
                 }
 
                 SearchFragmentState.IS_SEARCHING -> {
+
                     binding.searchIcon.setImageResource(R.drawable.search)
                     binding.pb.isVisible = true
                     binding.refreshBtn.isVisible = false
@@ -74,12 +76,14 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
                 }
 
                 SearchFragmentState.IS_SHOWING_SEARCH_RESULT -> {
+
                     adapter.submitList(itemViewModel.foundItems.value)
                     binding.searchIcon.setImageResource(R.drawable.search)
                 }
 
                 SearchFragmentState.IS_IDLE -> {
                     adapter.submitList(emptyList())
+
                     binding.searchIcon.setImageResource(R.drawable.search)
                 }
             }
