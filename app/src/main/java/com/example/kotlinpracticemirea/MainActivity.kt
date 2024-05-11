@@ -2,7 +2,9 @@ package com.example.kotlinpracticemirea
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.kotlinpracticemirea.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +20,15 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         setContentView(binding.root)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        NavigationUI.setupWithNavController(
+            navigationBarView = binding.bottomNavigationView,
+            navController = Navigation.findNavController(this, binding.navHostFragment.id)
+        )
     }
 
 }

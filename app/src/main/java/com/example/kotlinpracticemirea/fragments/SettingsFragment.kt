@@ -37,8 +37,6 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initInterface() {
-       
-
         if ((requireActivity().applicationContext as FleaApplication).darkTheme) {
             binding.imageView.setImageResource(
                 R.drawable.moon
@@ -52,6 +50,4 @@ class SettingsFragment : Fragment() {
         }
 
     }
-
-
 }

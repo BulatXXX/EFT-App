@@ -46,17 +46,6 @@ class SearchHistoryManager() {
         for (i in searchHistoryListStringArr){
             if (i.isNotEmpty()) searchHistoryList.add(Item.fromString(i))
         }
-/*
-        val regex = "\\[(.*?), (.*?)\\]".toRegex()
-
-
-        val matches = regex.findAll(searchHistoryListString)
-
-        val items = matches.map {
-            val name = it.groupValues[1]
-            val iconLink = it.groupValues[2]
-            Item(name, iconLink=iconLink)
-        }.toList()*/
         return searchHistoryList
 
     }

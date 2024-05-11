@@ -46,9 +46,7 @@ class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
             binding.rv.adapter = adapter
         }
 
-        binding.backBtn.setOnClickListener {
-            Navigation.findNavController(requireView()).popBackStack()
-        }
+
 
     }
 

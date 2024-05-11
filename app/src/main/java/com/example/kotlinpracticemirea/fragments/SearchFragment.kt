@@ -3,8 +3,6 @@ package com.example.kotlinpracticemirea.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -35,10 +33,9 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
 
     val itemViewModel: ItemViewModel by viewModels()
 
-    var practModeIsOn = false
 
-    private val SEARCH_DEBOUNCE_DELAY = 2000L
-    private val searchRunnable = Runnable {  itemViewModel.searchItem(binding.searchBar.text.toString()) }
+
+
 
 
     override fun onCreateView(
@@ -118,12 +115,8 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
 
         binding.searchBar.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence? , start: Int , before: Int , count: Int) {
-
-                if (practModeIsOn) binding.searchIcon.isVisible =
-                    if (s?.length == 0) false else true
-
                 if (s?.length != 0) {
-                    searchDebounce()
+                    itemViewModel.searchItem(binding.searchBar.text.toString())
 
                     itemViewModel.searchFragmentState.value = SearchFragmentState.IS_SEARCHING
 
@@ -133,7 +126,6 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
                     binding.pb.isVisible = false
                     binding.noItemsFoundTV.isVisible = false
 
-                    itemViewModel.searchFragmentState.value = SearchFragmentState.IS_SHOWING_HISTORY
                 }
             }
 
@@ -151,23 +143,15 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
         binding.searchList.adapter = adapter
 
         binding.searchList.layoutManager =
-            object : LinearLayoutManager(context , LinearLayoutManager.VERTICAL , false) {
+            object : LinearLayoutManager(context , VERTICAL , false) {
                 override fun canScrollVertically(): Boolean {
                     return true
                 }
             }
 
-        binding.favButton.setOnClickListener {
-            val action = SearchFragmentDirections.actionSearchFragmentToNotesFragment()
-            Navigation.findNavController(requireView()).navigate(action)
-        }
 
-        //Функция очистки списка для практики
-        binding.searchIcon.setOnLongClickListener {
-            practModeIsOn = !practModeIsOn
-            Toast.makeText(context , "Pract mode = $practModeIsOn" , Toast.LENGTH_SHORT).show()
-            true
-        }
+
+
 
         binding.searchIcon.setOnClickListener {
             if (itemViewModel.searchFragmentState.value == SearchFragmentState.IS_SHOWING_HISTORY) {
@@ -202,11 +186,7 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
 
         }
 
-        binding.favButton.setOnLongClickListener {
-            val action = SearchFragmentDirections.actionSearchFragmentToSettingsFragment()
-            Navigation.findNavController(requireView()).navigate(action)
-            true
-        }
+
 
         binding.refreshBtn.setOnClickListener {
             itemViewModel.searchItem(binding.searchBar.text.toString())
@@ -224,12 +204,7 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
 
     }
 
-    private fun searchDebounce() {
-        val handler = Handler(Looper.getMainLooper())
-        handler.removeCallbacks(searchRunnable)
-        handler.postDelayed(searchRunnable,SEARCH_DEBOUNCE_DELAY)
 
-    }
 
 
     override fun OnClick(item: Item) {
