@@ -6,10 +6,13 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.kotlinpracticemirea.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         setContentView(binding.root)
 
+
+
     }
 
     override fun onStart() {
@@ -29,5 +34,6 @@ class MainActivity : AppCompatActivity() {
             navController = Navigation.findNavController(this, binding.navHostFragment.id)
         )
     }
+
 
 }
