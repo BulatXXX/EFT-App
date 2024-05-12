@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215531601479",
+    "project_id": "eft-app-9eb52",
+    "storage_bucket": "eft-app-9eb52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215531601479:android:46291c7687740cdec33b62",
+        "android_client_info": {
+          "package_name": "com.example.kotlinpracticemirea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfj8thsmwuAeTEH6s6uuRpi4n18Y7oVfk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
