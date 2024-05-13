@@ -53,10 +53,14 @@
         android:id="@+id/registerFragment"
         android:name="com.example.kotlinpracticemirea.fragments.authorization.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.ProfileFragment"
+        android:name="com.example.kotlinpracticemirea.fragments.authorization.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

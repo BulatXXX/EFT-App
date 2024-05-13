@@ -7,18 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.compose.NavHost
 import com.example.kotlinpracticemirea.R
-import com.example.kotlinpracticemirea.databinding.FragmentLoginBinding
+import com.example.kotlinpracticemirea.databinding.FragmentProfileBinding
 import com.example.kotlinpracticemirea.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentRegisterBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
@@ -26,21 +24,27 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
-            regBtn.setOnClickListener {
-                userViewModel.registerUser(regEmail.text.toString(),regPass.text.toString(),requireContext())
+
+            textView.text = userViewModel.displayName.value
+            logoutBtn.setOnClickListener {
+                userViewModel.logOutUser()
+                Navigation.findNavController(requireView()).popBackStack()
+            }
+
+            editBtn.setOnClickListener {
+                userViewModel.updateUser(profileName.text.toString(),requireContext())
             }
         }
-        userViewModel.loggedInState.observe(viewLifecycleOwner){
-            if (it){
-                Navigation.findNavController(requireView()).navigate(RegisterFragmentDirections.actionRegisterFragmentToProfileFragment())
-            }
+        userViewModel.displayName.observe(viewLifecycleOwner){
+            binding.textView.text = it
         }
     }
 

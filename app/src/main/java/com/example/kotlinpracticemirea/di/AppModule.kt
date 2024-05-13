@@ -2,10 +2,14 @@ package com.example.kotlinpracticemirea.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.kotlinpracticemirea.FleaApplication
 import com.example.kotlinpracticemirea.Item.ItemRepository
+import com.example.kotlinpracticemirea.MainActivity
 import com.example.kotlinpracticemirea.SearchHistoryManager
+import com.example.kotlinpracticemirea.fragments.authorization.UserRepository
 import com.example.kotlinpracticemirea.room.FleaMarketDatabase
 import com.example.kotlinpracticemirea.room.ItemDao
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,6 +40,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSearchHistoryManager() = SearchHistoryManager()
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(auth:FirebaseAuth) = UserRepository(auth)
+
+    @Provides
+    @Singleton
+    fun provideFireBaseAuth() = FirebaseAuth.getInstance()
 
 
 }

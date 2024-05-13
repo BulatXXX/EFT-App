@@ -7,6 +7,7 @@
     tools:context=".fragments.authorization.LoginFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -17,38 +18,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.246">
 
-        <TextView
-            style="@style/Heading1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="REGISTER" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:hint="E-mail" />
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/reg_pass"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:hint="password" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/reg_btn"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="30dp"
-            android:text="register" />
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            />
+            android:layout_height="100dp" />
+
         <TextView
             style="@style/Heading1"
             android:layout_width="wrap_content"
@@ -57,6 +31,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textEmailAddress"
             android:id="@+id/log_email"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -77,5 +52,16 @@
             android:layout_marginStart="30dp"
             android:text="login" />
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/reg_btn"
+
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="88dp"
+        android:text="register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
