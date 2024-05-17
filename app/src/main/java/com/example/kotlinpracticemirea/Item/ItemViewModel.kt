@@ -27,10 +27,7 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
 
     val searchFragmentState = MutableLiveData<SearchFragmentState>(SearchFragmentState.IS_IDLE)
 
-
     val isResponseSuccessful = repository.isResponseSuccessful
-
-
 
     fun searchItem(name: String) {
         searchJob?.cancel()

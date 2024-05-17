@@ -11,7 +11,10 @@ import com.google.gson.Gson
 import org.json.JSONObject
 import javax.inject.Inject
 
-class ItemRepository @Inject constructor(private val itemDao: ItemDao,private val searchHistoryManager: SearchHistoryManager) {
+class ItemRepository @Inject constructor(
+    private val itemDao: ItemDao,
+    private val searchHistoryManager: SearchHistoryManager
+) {
     var favouriteItems = itemDao.getAllItems()
 
     private val listOfFoundItems = MutableLiveData<List<Item>>(emptyList())
@@ -26,7 +29,7 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao,private va
     suspend fun getItemsListFromApi(name: String) {
         val paramObject = JSONObject()
         paramObject.put(
-            "query" , "query {items(name:\"$name\"){id\n" +
+            "query", "query {items(name:\"$name\"){id\n" +
                     "    name\n" +
                     "    description\n" +
                     "    avg24hPrice\n" +
@@ -43,9 +46,9 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao,private va
 
             var responseBody = response.body().toString()
 
-            Log.e("response" , responseBody)
+            Log.e("response", responseBody)
             val gson = Gson()
-            val responseData = gson.fromJson(responseBody , ResponseData::class.java)
+            val responseData = gson.fromJson(responseBody, ResponseData::class.java)
             val items = responseData.data.items
             foundItems.postValue(items)
         } catch (e: java.lang.Exception) {
@@ -62,16 +65,18 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao,private va
         itemDao.deleteItem(item)
     }
 
-    fun checkIsFavourite(id: String):Boolean = itemDao.getItemById(id)!=null
+    fun checkIsFavourite(id: String): Boolean = itemDao.getItemById(id) != null
 
-    fun clearSearchHistory(context: Context){
+    fun clearSearchHistory(context: Context) {
         searchHistoryManager.clearSearchHistory(context)
         searchHistoryList.postValue(emptyList())
     }
-    fun saveToSharedPreferences(item: Item , context: Context) {
-        searchHistoryManager.saveToSharedPreferences(item,context)
+
+    fun saveToSharedPreferences(item: Item, context: Context) {
+        searchHistoryManager.saveToSharedPreferences(item, context)
     }
-    fun getHistoryList(context: Context){
+
+    fun getHistoryList(context: Context) {
         searchHistoryList.postValue(searchHistoryManager.getHistoryList(context))
     }
 }
