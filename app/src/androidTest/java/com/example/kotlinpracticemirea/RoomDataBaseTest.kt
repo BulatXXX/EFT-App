@@ -31,11 +31,17 @@ class RoomDataBaseTest{
 
     @Test
     fun shouldInsertItem()= runBlocking{
-        val insertedItem = Item(id = "1", name = "Item")
+        val insertedItem = Item(id = "2", name = "Item")
 
         userDao.addItem(insertedItem)
 
-        Assert.assertEquals("Item",userDao.getItemById("1"))
+        Assert.assertEquals("Item",userDao.getItemById("2"))
+    }
+
+    @Test
+    fun shouldDeleteItem() = runBlocking {
+        userDao.deleteItem(Item(id = "2", name = "Item"))
+        Assert.assertEquals(null,userDao.getItemById("2"))
     }
     @After
     fun closeDb() {
