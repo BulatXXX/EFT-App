@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
 
-    val loggedInState = MutableLiveData<Boolean>(false)
+    val loggedInState = MutableLiveData<Boolean>(true)
     val displayName = MutableLiveData<String>()
     fun registerUser(email: String, password: String, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {

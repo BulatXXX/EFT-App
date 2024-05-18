@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/searchBar"
-        style="@style/RegularEditText"
+        style="@style/TextInput"
         android:layout_width="720dp"
         android:layout_height="wrap_content"
 

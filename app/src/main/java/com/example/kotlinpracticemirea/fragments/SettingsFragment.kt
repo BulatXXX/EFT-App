@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.kotlinpracticemirea.FleaApplication
 import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentSettingsBinding
@@ -17,21 +18,21 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     @SuppressLint("CommitPrefEdits")
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.switchTheme.setOnCheckedChangeListener { switcher , checked ->
+        binding.switchTheme.setOnCheckedChangeListener { switcher, checked ->
             (requireActivity().applicationContext as FleaApplication).switchTheme(checked)
             requireActivity().recreate()
         }
-        super.onViewCreated(view , savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater ,
-        container: ViewGroup? ,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingsBinding.inflate(inflater , container , false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         initInterface()
         return binding.root
     }
@@ -41,6 +42,9 @@ class SettingsFragment : Fragment() {
             binding.imageView.setImageResource(
                 R.drawable.moon
             )
+            binding.backBtn.setOnClickListener {
+                Navigation.findNavController(requireView()).popBackStack()
+            }
             binding.switchTheme.text = "Dark Theme"
             binding.switchTheme.isChecked = true
         } else {

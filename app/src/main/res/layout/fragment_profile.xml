@@ -9,43 +9,59 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/Heading1"
-        android:layout_width="match_parent"
+        style="@style/HeadingLevel1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/profile"
+        app:layout_constraintEnd_toEndOf="@+id/profileName"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/settingsBtn"
+        style="@style/Icon.TopBarButton"
+        android:src="@drawable/settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/profileName"
-        style="@style/RegularEditText"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-
+        android:layout_marginTop="@dimen/vertical_margin"
+        style="@style/TextInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureCard" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/profilePictureCard"
+        style="@style/Icon.LargeIcon"
+        android:layout_marginTop="@dimen/top_margin_profile_pic"
+        app:cardCornerRadius="@dimen/large_icon_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:id="@+id/profilePic"
+            android:src="@drawable/user"
+            style="@style/Icon.LargeIcon" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
         android:id="@+id/logoutBtn"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="LOG OUT"
+        style="@style/Icon.FAB"
+        android:src="@drawable/log_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:tint="@color/white" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editBtn"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        style="@style/Button"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="@+id/profileName"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

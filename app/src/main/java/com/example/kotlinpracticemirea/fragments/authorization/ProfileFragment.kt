@@ -36,14 +36,19 @@ class ProfileFragment : Fragment() {
             textView.text = userViewModel.displayName.value
             logoutBtn.setOnClickListener {
                 userViewModel.logOutUser()
-                Navigation.findNavController(requireView()).popBackStack()
+                Navigation.findNavController(requireView()).navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
             }
 
             editBtn.setOnClickListener {
-                userViewModel.updateUser(profileName.text.toString(),requireContext())
+                userViewModel.updateUser(profileName.text.toString(), requireContext())
             }
+            settingsBtn.setOnClickListener {
+                Navigation.findNavController(requireView())
+                    .navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
+            }
+
         }
-        userViewModel.displayName.observe(viewLifecycleOwner){
+        userViewModel.displayName.observe(viewLifecycleOwner) {
             binding.textView.text = it
         }
     }
@@ -52,6 +57,19 @@ class ProfileFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+    override fun onStart() {
+        super.onStart()
+        checkLoggedInState()
+        userViewModel.loggedInState.observe(viewLifecycleOwner){
+            if (!it){
+                Navigation.findNavController(requireView()).navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+            }
+        }
 
+    }
+
+    private fun checkLoggedInState() {
+        userViewModel.checkLoggedInState(requireContext())
+    }
 
 }

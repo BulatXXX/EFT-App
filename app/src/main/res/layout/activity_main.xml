@@ -26,7 +26,6 @@
         android:layout_width="match_parent"
         android:background="?attr/backgroundColor"
         app:menu="@menu/bottom_nav_bar"
-
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

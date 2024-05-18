@@ -1,61 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MainHeader" parent="TextAppearance.AppCompat">
+
+    <!--TEXT-->
+    <style name="Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/geometria_medium</item>
         <item name="android:textColor">?attr/textFillColor</item>
-        <item name="android:textSize">32sp</item>
-        <item name="fontFamily">@font/geometria_extrabold</item>
-        <item name="android:layout_marginStart">32dp</item>
-        <item name="android:layout_marginTop">20dp</item>
     </style>
-    <style name="Heading1" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">?attr/textFillColor</item>
-        <item name="android:textSize">28sp</item>
+    <style name="Text.Marque">
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="Text.SearchItemMarque" parent="Text.Marque">
+        <item name="android:layout_width">@dimen/portrait_search_item_width</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/large_text_size</item>
+        <item name="android:layout_marginStart">@dimen/search_item_name_start_margin</item>
+    </style>
+    <style name="Text.MarqueItemName" parent="Text.Marque">
+        <item name="android:layout_width">@dimen/portrait_fav_item_name_width</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">@dimen/large_text_size</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_margin_small</item>
+    </style>
+    <style name="Text.MarqueItemPrice" parent="Text.Marque">
+        <item name="android:layout_width">@dimen/portrait_fav_item_price_width</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:layout_marginStart">@dimen/portrait_fav_item_price_start_margin</item>
+    </style>
+
+    <style name="RegularText" parent="Text">
+        <item name="android:textSize">@dimen/large_text_size</item>
+        <item name="android:layout_marginTop">@dimen/vertical_margin</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_margin</item>
+    </style>
+
+    <style name="RegularText.ItemDescription" parent="RegularText">
+        <item name="android:justificationMode">inter_word</item>
+        <item name="android:layout_width">@dimen/item_description_size</item>
+    </style>
+    <!--Headings-->
+    <style name="ItemHeading" parent="Text">
+        <item name="android:layout_width">@dimen/item_heading_width</item>
+        <item name="android:textSize">@dimen/extra_large_text_size</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/vertical_margin</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:text">@string/item_name</item>
+    </style>
+
+    <style name="HeadingLevel1" parent="Text">
+        <item name="textAllCaps">true</item>
+        <item name="android:textSize">@dimen/extra_large_text_size</item>
         <item name="fontFamily">@font/geometria_bold</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginTop">@dimen/vertical_margin</item>
     </style>
-    <style name="RegularText" parent="TextAppearance.AppCompat">
-        <item name="fontFamily">@font/geometria_medium</item>
-        <item name="android:textColor">?attr/textFillColor</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:layout_marginStart">32dp</item>
-    </style>
-    <style name="RegularEditText" parent="RegularText">
-        <item name="hintTextColor">@color/grey</item>
-        <item name="colorControlNormal">@color/grey</item>
-        <item name="colorControlActivated">?attr/textFillColor</item>
-        <item name="colorControlHighlight">?attr/textFillColor</item>
-        <item name="backgroundTint">@color/grey</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:layout_marginStart">32dp</item>
-    </style>
-    <style name="OutlinedRegularButton" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="strokeColor">?attr/textFillColor</item>
-        <item name="android:textColor">?attr/textFillColor</item>
-        <item name="android:textSize">24sp</item>
-        <item name="fontFamily">@font/geometria_medium</item>
-        <item name="android:layout_marginTop">20dp</item>
 
-    </style>
-    <style name="ElevatedRegularButton" parent="Widget.Material3.Button.ElevatedButton">
-        <item name="strokeColor">?attr/textFillColor</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">24sp</item>
-        <item name="backgroundTint">?attr/textFillColor</item>
+    <!--TEXT INPUT-->
+    <style name="TextInput">
+        <item name="android:layout_width">@dimen/long_element_width</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="fontFamily">@font/geometria_medium</item>
-        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
 
+    <style name="TextInput.Email" parent="TextInput">
+        <item name="android:layout_marginTop">@dimen/auth_login_margin_top</item>
+        <item name="android:inputType">textEmailAddress</item>
+        <item name="android:hint">@string/e_mail</item>
     </style>
-    <style name="viewpager">
-     <item name="android:layout_marginTop">20dp</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">180dp</item>
-        <item name="android:paddingStart">40dp</item>
-        <item name="android:paddingEnd">40dp</item>
+
+    <style name="TextInput.Password">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:hint">@string/password</item>
     </style>
-    <style name="viewpager2" parent="viewpager">
-        <item name="android:paddingStart">10dp</item>
-        <item name="android:paddingEnd">10dp</item>
+
+    <style name="TextInput.SearchBar">
+        <item name="android:saveEnabled">true</item>
+        <item name="android:hint">@string/item_name</item>
+        <item name="android:layout_width">@dimen/search_bar_width</item>
+        <item name="android:layout_marginTop">@dimen/vertical_margin</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_margin</item>
     </style>
+    <!--ICONS-->
+    <style name="Icon">
+        <item name="android:layout_width">@dimen/icon_size</item>
+        <item name="android:layout_height">@dimen/icon_size</item>
+    </style>
+
+    <style name="Icon.FAB" parent="Icon">
+        <item name="android:layout_marginEnd">@dimen/horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/vertical_margin</item>
+    </style>
+
+    <style name="Icon.TopBarButton" parent="Icon">
+        <item name="tint">@color/white</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/vertical_margin</item>
+    </style>
+
+    <style name="Icon.LargeIcon">
+        <item name="android:layout_width">@dimen/large_icon_size</item>
+        <item name="android:layout_height">@dimen/large_icon_size</item>
+    </style>
+
+    <style name="ItemIcon">
+        <item name="android:layout_width">@dimen/item_icon_size</item>
+        <item name="android:layout_height">@dimen/item_icon_size</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+
+    <!--BUTTONS-->
+    <style name="Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/geometria_bold</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
+
+    <style name="Button.Large" parent="Button">
+        <item name="android:width">@dimen/long_element_width</item>
+    </style>
+
+
+    <dimen name="large_icon_size">150dp</dimen>
 </resources>

@@ -9,59 +9,34 @@
 
     <ImageView
         android:id="@+id/backButton"
-
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        style="@style/Icon.TopBarButton"
         android:src="@drawable/back_arrow"
-        android:text="Item Name"
-        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:id="@+id/likeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/heart"
-        android:text="Item Name"
-        android:textAlignment="center"
-        app:fabCustomSize="60dp"
-        app:fabSize="auto"
+        style="@style/Icon.FAB"
+        android:src="@drawable/like_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="50dp"
-        app:tint="@color/dark_violet" />
+         />
 
     <TextView
         android:id="@+id/item_name"
-        style="@style/MainHeader"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="Item Name"
-        android:textAlignment="textEnd"
+        style="@style/ItemHeading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/item_description"
-        style="@style/RegularText"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:justificationMode="inter_word"
-        android:text="Description Descghgjhgjhgjhgjhuiyiuyiuiuyiuyiuyiuyiuyiuyiuyuiyiuyiuyription Description Description Description Description Description"
+        style="@style/RegularText.ItemDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_image" />
 
     <ProgressBar
         android:id="@+id/pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Icon"
         app:layout_constraintBottom_toBottomOf="@+id/item_image"
         app:layout_constraintEnd_toEndOf="@id/item_image"
         app:layout_constraintStart_toStartOf="@id/item_image"
@@ -70,32 +45,26 @@
     <ImageView
         android:id="@+id/item_image"
         android:layout_width="wrap_content"
-        android:layout_height="170dp"
+        android:layout_height="@dimen/item_image_height"
         android:src="@color/black"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
-
     <TextView
         android:id="@+id/priceTV"
         style="@style/RegularText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price:"
+        android:text="@string/price_colon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_description" />
 
     <TextView
         android:id="@+id/item_price"
         style="@style/RegularText"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="500"
+        android:layout_width="@dimen/item_price_size"
         android:textColor="@color/green"
         app:layout_constraintStart_toEndOf="@+id/priceTV"
         app:layout_constraintTop_toBottomOf="@+id/item_description" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,30 +12,19 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         app:layout_constraintStart_toStartOf="@id/parentConstraint"
         app:layout_constraintTop_toTopOf="@id/parentConstraint">
 
         <ImageView
             android:id="@+id/icon"
-            style=""
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            style="@style/ItemIcon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/knife_icon_w" />
 
         <TextView
             android:id="@+id/name"
-            style="@style/RegularText"
-            android:layout_width="200dp"
-            android:singleLine="true"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="0dp"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
+            style="@style/Text.SearchItemMarque"
             app:layout_constraintBottom_toBottomOf="@+id/icon"
             app:layout_constraintStart_toEndOf="@+id/icon"
             app:layout_constraintTop_toTopOf="@+id/icon" />

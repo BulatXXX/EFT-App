@@ -47,20 +47,16 @@ class ItemFragment : Fragment() {
     private var isFavourite = false
 
     override fun onCreateView(
-        inflater: LayoutInflater , container: ViewGroup? ,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentItemBinding.inflate(layoutInflater , container , false)
+        _binding = FragmentItemBinding.inflate(layoutInflater, container, false)
 
         return binding.root
     }
 
-    private fun saveItemToHistory() {
-
-    }
-
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
-        super.onViewCreated(view , savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         itemViewModel.check(args.item.id) {
             setUpLike(it);
@@ -74,43 +70,32 @@ class ItemFragment : Fragment() {
 
         binding.likeButton.setOnClickListener {
             if (!isFavourite) {
-                binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
-                //binding.likeButton.setImageResource(R.drawable.like_red)
+                binding.likeButton.setImageResource(R.drawable.like_red)
                 isFavourite = !isFavourite
                 itemViewModel.addToFavourites(args.item)
             } else {
                 itemViewModel.deleteFromFavourites(args.item)
                 isFavourite = !isFavourite
-                binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
-                //binding.likeButton.setImageResource(R.drawable.like_white)
+                binding.likeButton.setImageResource(R.drawable.like_white)
             }
         }
         binding.itemImage.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Saving image")
             builder.setMessage("Do you want to save image?")
-            builder.setPositiveButton("Yes"){ _ ,i ->
+            builder.setPositiveButton("Yes") { _, i ->
                 saveToGallery(requireContext(), binding.itemImage.drawToBitmap())
             }
             builder.show()
         }
-
-
-
         setUpInterface(args.item)
-        saveItemToHistory()
-
     }
-
 
     private fun setUpLike(isFavourite: Boolean) {
         if (isFavourite) {
-
-            binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
-           // binding.likeButton.setImageResource(R.drawable.like_red)
+            binding.likeButton.setImageResource(R.drawable.like_red)
         } else {
-            binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
-           // binding.likeButton.setImageResource(R.drawable.like_white)
+            binding.likeButton.setImageResource(R.drawable.like_white)
         }
     }
 
@@ -153,27 +138,27 @@ class ItemFragment : Fragment() {
         }
     }
 
-    private fun saveToGallery(context: Context , bitmap: Bitmap , albumName: String = "Tarkov_App") {
+    private fun saveToGallery(context: Context, bitmap: Bitmap, albumName: String = "Tarkov_App") {
         val dispatcher =
             newSingleThreadContext("Disk")
         CoroutineScope(dispatcher).launch {
             val filename = "${System.currentTimeMillis()}.png"
             val write: (OutputStream) -> Boolean = {
-                bitmap.compress(Bitmap.CompressFormat.PNG , 100 , it)
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val contentValues = ContentValues().apply {
-                    put(MediaStore.MediaColumns.DISPLAY_NAME , filename)
-                    put(MediaStore.MediaColumns.MIME_TYPE , "image/png")
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
                     put(
-                        MediaStore.MediaColumns.RELATIVE_PATH ,
+                        MediaStore.MediaColumns.RELATIVE_PATH,
                         "${Environment.DIRECTORY_DCIM}/$albumName"
                     )
                 }
 
                 context.contentResolver.let {
-                    it.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , contentValues)
+                    it.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                         ?.let { uri ->
                             it.openOutputStream(uri)?.let(write)
                         }
@@ -186,7 +171,7 @@ class ItemFragment : Fragment() {
                 if (!file.exists()) {
                     file.mkdir()
                 }
-                val image = File(imagesDir , filename)
+                val image = File(imagesDir, filename)
                 write(FileOutputStream(image))
             }
         }

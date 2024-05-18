@@ -9,4 +9,14 @@
     <string name="save">Save</string>
     <string name="welcome_to_bear_pmc">Welcome to Bear PMC</string>
     <string name="item_name">Item name</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="price_colon">Price:</string>
+    <string name="no_items_found">No Items Found!</string>
+    <string name="login">LOGIN</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="register">Register</string>
+    <string name="theme">Theme</string>
+    <string name="settings">SETTINGS</string>
+    <string name="profile">PROFILE</string>
 </resources>
