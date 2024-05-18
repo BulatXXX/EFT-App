@@ -1,6 +1,7 @@
 package com.example.kotlinpracticemirea.fragments.authorization
 
 import android.content.Context
+import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -10,16 +11,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.net.URI
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
 
     val loggedInState = MutableLiveData<Boolean>(true)
     val displayName = MutableLiveData<String>()
-    fun registerUser(email: String, password: String, context: Context) {
+    val profilePic = MutableLiveData<Uri>()
+    fun registerUser(username: String, email: String, password: String, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                auth.createUserWithEmailAndPassword(email, password).await()
+                auth.apply {
+                    createUserWithEmailAndPassword(email, password).await()
+                    updateUser(username, context)
+                }
                 withContext(Dispatchers.Main) {
                     checkLoggedInState(context)
                 }
@@ -58,27 +64,33 @@ class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
         if (auth.currentUser == null) {
             Toast.makeText(context, "not logged", Toast.LENGTH_SHORT).show()
             loggedInState.postValue(false)
+
         } else {
             Toast.makeText(context, "logged", Toast.LENGTH_SHORT).show()
             loggedInState.postValue(true)
             displayName.postValue(auth.currentUser?.displayName)
+            profilePic.postValue(auth.currentUser?.photoUrl)
         }
     }
 
-    fun updateUser(username: String,context: Context) {
-        auth.currentUser?.let {user ->
-            val userProfileChangeRequest = UserProfileChangeRequest.Builder().setDisplayName(username).build()
+    fun updateUser(username: String, context: Context, uri: Uri? = null) {
+        auth.currentUser?.let { user ->
+            val userProfileChangeRequest =
+                UserProfileChangeRequest.Builder()
+                    .setDisplayName(username).setPhotoUri(uri)
+                    .build()
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     user.updateProfile(userProfileChangeRequest).await()
-                    displayName.postValue(username)
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(context,"Updated",Toast.LENGTH_SHORT).show()
+                    username.let {displayName.postValue(it)  }
+                    uri.let { profilePic.postValue(it) }
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
                     }
 
-                }catch (e:Exception){
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

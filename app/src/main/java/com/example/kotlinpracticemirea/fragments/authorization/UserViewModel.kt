@@ -1,6 +1,7 @@
 package com.example.kotlinpracticemirea.fragments.authorization
 
 import android.content.Context
+import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,9 +15,11 @@ class UserViewModel @Inject constructor(private val repository: UserRepository) 
 
     val loggedInState = repository.loggedInState
     val displayName = repository.displayName
+    val profilePic = repository.profilePic
 
-    fun registerUser(email: String, password: String, context: Context) {
-        repository.registerUser(email, password, context)
+
+    fun registerUser(username:String,email: String, password: String, context: Context) {
+        repository.registerUser(username,email, password, context)
 
     }
 
@@ -33,7 +36,7 @@ class UserViewModel @Inject constructor(private val repository: UserRepository) 
 
     }
 
-    fun updateUser(username: String, context: Context) {
-        repository.updateUser(username, context)
+    fun updateUser(context: Context,username: String = displayName.value.toString(),uri: Uri?=null) {
+        repository.updateUser(username, context,uri)
     }
 }

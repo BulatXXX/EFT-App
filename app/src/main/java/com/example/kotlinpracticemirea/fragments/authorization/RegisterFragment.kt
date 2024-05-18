@@ -34,12 +34,18 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             regBtn.setOnClickListener {
-                userViewModel.registerUser(regEmail.text.toString(),regPass.text.toString(),requireContext())
+                userViewModel.registerUser(
+                    regLogin.text.toString(),
+                    regEmail.text.toString(),
+                    regPass.text.toString(),
+                    requireContext()
+                )
             }
         }
-        userViewModel.loggedInState.observe(viewLifecycleOwner){
-            if (it){
-                Navigation.findNavController(requireView()).navigate(RegisterFragmentDirections.actionRegisterFragmentToProfileFragment())
+        userViewModel.loggedInState.observe(viewLifecycleOwner) {
+            if (it) {
+                Navigation.findNavController(requireView())
+                    .navigate(RegisterFragmentDirections.actionRegisterFragmentToProfileFragment())
             }
         }
     }

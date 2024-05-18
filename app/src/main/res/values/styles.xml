@@ -79,6 +79,10 @@
         <item name="android:inputType">textPassword</item>
         <item name="android:hint">@string/password</item>
     </style>
+    <style name="TextInput.Login">
+        <item name="android:inputType">text</item>
+        <item name="android:hint">@string/name</item>
+    </style>
 
     <style name="TextInput.SearchBar">
         <item name="android:saveEnabled">true</item>
@@ -130,4 +134,5 @@
 
 
     <dimen name="large_icon_size">150dp</dimen>
+    <string name="name">Name</string>
 </resources>

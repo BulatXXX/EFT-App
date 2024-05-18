@@ -16,6 +16,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/reg_Login"
+        style="@style/TextInput.Login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_email" />
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/reg_email"
         style="@style/TextInput.Email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +33,7 @@
         android:id="@+id/reg_pass"
         style="@style/TextInput.Password"
         app:layout_constraintStart_toStartOf="@+id/reg_email"
-        app:layout_constraintTop_toBottomOf="@+id/reg_email" />
+        app:layout_constraintTop_toBottomOf="@+id/reg_Login" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/reg_btn"
