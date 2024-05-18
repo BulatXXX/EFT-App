@@ -5,7 +5,9 @@
         <item name="colorPrimary">@color/white</item>
         <item name="textFillColor">@color/white</item>
         <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/white</item>
         <!-- Status bar color. -->
+
         <item name="backgroundColor">@color/dark_violet</item>
         <item name="android:statusBarColor">@color/dark_violet</item>
         <item name="android:navigationBarColor">@color/dark_violet</item>

@@ -4,6 +4,7 @@ package com.example.kotlinpracticemirea.fragments
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -26,6 +27,7 @@ import com.example.kotlinpracticemirea.Item.Item
 import com.example.kotlinpracticemirea.Item.ItemViewModel
 import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentItemBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -72,13 +74,15 @@ class ItemFragment : Fragment() {
 
         binding.likeButton.setOnClickListener {
             if (!isFavourite) {
-                binding.likeButton.setImageResource(R.drawable.like_red)
+                binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
+                //binding.likeButton.setImageResource(R.drawable.like_red)
                 isFavourite = !isFavourite
                 itemViewModel.addToFavourites(args.item)
             } else {
                 itemViewModel.deleteFromFavourites(args.item)
                 isFavourite = !isFavourite
-                binding.likeButton.setImageResource(R.drawable.like_white)
+                binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
+                //binding.likeButton.setImageResource(R.drawable.like_white)
             }
         }
         binding.itemImage.setOnClickListener {
@@ -101,9 +105,12 @@ class ItemFragment : Fragment() {
 
     private fun setUpLike(isFavourite: Boolean) {
         if (isFavourite) {
-            binding.likeButton.setImageResource(R.drawable.like_red)
+
+            binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.RED)
+           // binding.likeButton.setImageResource(R.drawable.like_red)
         } else {
-            binding.likeButton.setImageResource(R.drawable.like_white)
+            binding.likeButton.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
+           // binding.likeButton.setImageResource(R.drawable.like_white)
         }
     }
 
