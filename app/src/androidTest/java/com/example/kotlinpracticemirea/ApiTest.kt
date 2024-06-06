@@ -1,15 +1,10 @@
 package com.example.kotlinpracticemirea
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.example.kotlinpracticemirea.Item.ItemRepository
 import com.example.kotlinpracticemirea.room.FleaMarketDatabase
-import kotlinx.coroutines.runBlocking
-import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)

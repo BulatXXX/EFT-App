@@ -73,7 +73,6 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
                 }
 
                 SearchFragmentState.IS_SHOWING_SEARCH_RESULT -> {
-
                     adapter.submitList(itemViewModel.foundItems.value)
                     binding.searchIcon.setImageResource(R.drawable.search)
                 }

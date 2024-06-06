@@ -109,6 +109,7 @@
     </style>
 
     <style name="Icon.LargeIcon">
+        <item name="android:scaleType">fitCenter</item>
         <item name="android:layout_width">@dimen/large_icon_size</item>
         <item name="android:layout_height">@dimen/large_icon_size</item>
     </style>

@@ -8,10 +8,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.net.URI
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
@@ -19,6 +19,8 @@ class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
     val loggedInState = MutableLiveData<Boolean>(true)
     val displayName = MutableLiveData<String>()
     val profilePic = MutableLiveData<Uri>()
+
+
     fun registerUser(username: String, email: String, password: String, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -42,7 +44,7 @@ class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
         //Validating the info logic required
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                auth.signInWithEmailAndPassword(email, password)
+                auth.signInWithEmailAndPassword(email, password).await()
                 withContext(Dispatchers.Main) {
                     checkLoggedInState(context)
                 }
@@ -55,9 +57,10 @@ class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
         }
     }
 
-    fun logOutUser() {
+    suspend fun logOutUser() {
         auth.signOut()
         loggedInState.postValue(false)
+        delay(300)
     }
 
     fun checkLoggedInState(context: Context) {
@@ -69,9 +72,12 @@ class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
             Toast.makeText(context, "logged", Toast.LENGTH_SHORT).show()
             loggedInState.postValue(true)
             displayName.postValue(auth.currentUser?.displayName)
-            profilePic.postValue(auth.currentUser?.photoUrl)
+          //  profilePic.postValue(auth.currentUser?.photoUrl)
         }
     }
+
+
+
 
     fun updateUser(username: String, context: Context, uri: Uri? = null) {
         auth.currentUser?.let { user ->
@@ -87,7 +93,6 @@ class UserRepository @Inject constructor(private val auth: FirebaseAuth) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
                     }
-
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()

@@ -2,9 +2,7 @@ package com.example.kotlinpracticemirea.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.kotlinpracticemirea.FleaApplication
 import com.example.kotlinpracticemirea.Item.ItemRepository
-import com.example.kotlinpracticemirea.MainActivity
 import com.example.kotlinpracticemirea.SearchHistoryManager
 import com.example.kotlinpracticemirea.fragments.authorization.UserRepository
 import com.example.kotlinpracticemirea.room.FleaMarketDatabase
@@ -15,7 +13,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)

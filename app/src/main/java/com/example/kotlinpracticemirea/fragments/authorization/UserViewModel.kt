@@ -2,7 +2,6 @@ package com.example.kotlinpracticemirea.fragments.authorization
 
 import android.content.Context
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,9 +30,10 @@ class UserViewModel @Inject constructor(private val repository: UserRepository) 
         repository.checkLoggedInState(context)
     }
 
-    fun logOutUser() {
-        viewModelScope.launch(Dispatchers.IO) { repository.logOutUser() }
-
+    fun logOutUser(context: Context) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.logOutUser()
+        }
     }
 
     fun updateUser(context: Context,username: String = displayName.value.toString(),uri: Uri?=null) {

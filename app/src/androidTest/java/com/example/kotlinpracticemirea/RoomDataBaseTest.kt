@@ -3,7 +3,6 @@ package com.example.kotlinpracticemirea
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.example.kotlinpracticemirea.Item.Item
 import com.example.kotlinpracticemirea.room.FleaMarketDatabase
@@ -17,36 +16,37 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class RoomDataBaseTest{
+class RoomDataBaseTest {
     private lateinit var userDao: ItemDao
     private lateinit var db: FleaMarketDatabase
+
     @Before
     fun createDb() {
 
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, FleaMarketDatabase::class.java).build()
+            context, FleaMarketDatabase::class.java
+        ).build()
         userDao = db.itemDao()
     }
 
     @Test
-    fun shouldInsertItem()= runBlocking{
+    fun shouldInsertItem() = runBlocking {
         val insertedItem = Item(id = "2", name = "Item")
 
         userDao.addItem(insertedItem)
 
-        Assert.assertEquals("Item",userDao.getItemById("2"))
+        Assert.assertEquals("Item", userDao.getItemById("2"))
     }
 
     @Test
     fun shouldDeleteItem() = runBlocking {
         userDao.deleteItem(Item(id = "2", name = "Item"))
-        Assert.assertEquals(null,userDao.getItemById("2"))
+        Assert.assertEquals(null, userDao.getItemById("2"))
     }
+
     @After
     fun closeDb() {
         db.close()
     }
-
-
 }

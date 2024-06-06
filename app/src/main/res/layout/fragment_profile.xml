@@ -28,6 +28,7 @@
         android:id="@+id/profileName"
         android:layout_marginTop="@dimen/vertical_margin"
         style="@style/TextInput"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePictureCard" />
@@ -36,9 +37,9 @@
         android:id="@+id/profilePictureCard"
         style="@style/Icon.LargeIcon"
         android:layout_marginTop="@dimen/top_margin_profile_pic"
-        app:cardCornerRadius="@dimen/large_icon_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:cardCornerRadius="75dp"
+        android:layout_width="@dimen/large_icon_size"
+        android:layout_height="@dimen/large_icon_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -46,6 +47,9 @@
         <ImageView
             android:id="@+id/profilePic"
             android:src="@drawable/user"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             style="@style/Icon.LargeIcon" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -61,6 +65,7 @@
         android:id="@+id/editBtn"
         style="@style/Button"
         android:text="@string/save"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/profileName"
         app:layout_constraintTop_toBottomOf="@+id/profileName" />
 

@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.compose.NavHost
-import com.example.kotlinpracticemirea.R
-import com.example.kotlinpracticemirea.databinding.FragmentLoginBinding
 import com.example.kotlinpracticemirea.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 

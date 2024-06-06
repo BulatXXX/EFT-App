@@ -4,7 +4,6 @@ package com.example.kotlinpracticemirea.fragments
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -27,7 +26,6 @@ import com.example.kotlinpracticemirea.Item.Item
 import com.example.kotlinpracticemirea.Item.ItemViewModel
 import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentItemBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

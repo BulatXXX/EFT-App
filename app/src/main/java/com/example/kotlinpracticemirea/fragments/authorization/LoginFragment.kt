@@ -1,23 +1,14 @@
 package com.example.kotlinpracticemirea.fragments.authorization
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.example.kotlinpracticemirea.R
 import com.example.kotlinpracticemirea.databinding.FragmentLoginBinding
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -46,6 +37,9 @@ class LoginFragment : Fragment() {
                 loginUser()
             }
         }
+        userViewModel.loggedInState.observe(viewLifecycleOwner){
+            if (it) Navigation.findNavController(requireView()).popBackStack()
+        }
 
     }
 
@@ -55,35 +49,11 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
-    /*
-        private fun registerUser() {
-            binding.apply {
-                val email = regEmail.text.toString()
-                val password = regPass.text.toString()
-
-                //Validating the info logic required
-                CoroutineScope(Dispatchers.IO).launch {
-                    try {
-                        auth.createUserWithEmailAndPassword(email, password).await()
-                        withContext(Dispatchers.Main) {
-                            checkLoggedInState()
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-                }
-            }
-        }*/
 
     private fun loginUser() {
         binding.apply {
             val email = logEmail.text.toString()
             val password = logPass.text.toString()
-
             userViewModel.loginUser(email, password, requireContext())
         }
     }

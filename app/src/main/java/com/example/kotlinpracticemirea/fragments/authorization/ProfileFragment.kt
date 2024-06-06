@@ -2,7 +2,6 @@ package com.example.kotlinpracticemirea.fragments.authorization
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
@@ -11,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.kotlinpracticemirea.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.InputStream
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -28,19 +27,28 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        userViewModel.loggedInState.observe(viewLifecycleOwner) {
+            if (!it) {
+                findNavController()
+                    .navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+            }
+        }
+        userViewModel.profilePic.observe(viewLifecycleOwner){
+            binding.profilePic.setImageURI(it)
+        }
+
         binding.apply {
 
             textView.text = userViewModel.displayName.value
             logoutBtn.setOnClickListener {
-                userViewModel.logOutUser()
-                Navigation.findNavController(requireView())
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+                userViewModel.logOutUser(requireContext())
             }
             profileName.hint = userViewModel.displayName.value
 
@@ -60,6 +68,7 @@ class ProfileFragment : Fragment() {
             }
 
         }
+
         userViewModel.profilePic.observe(viewLifecycleOwner) {
             if (it != null) {
               binding.profilePic.setImageURI(it)
@@ -79,7 +88,9 @@ class ProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val imageUri = data.data
+
             userViewModel.updateUser(requireContext(), uri = imageUri)
+
         }
     }
 
@@ -92,13 +103,6 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         checkLoggedInState()
-        userViewModel.loggedInState.observe(viewLifecycleOwner) {
-            if (!it) {
-                Navigation.findNavController(requireView())
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-            }
-        }
-
     }
 
     private fun checkLoggedInState() {
