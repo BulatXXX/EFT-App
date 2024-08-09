@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.NotesFragment"
+        android:name="com.singularity.eft_app.fragments.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.SearchFragment"
+        android:name="com.singularity.eft_app.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -25,21 +25,21 @@
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.ItemFragment"
+        android:name="com.singularity.eft_app.fragments.ItemFragment"
         android:label="fragment_item"
         tools:layout="@layout/fragment_item" >
         <argument
             android:name="item"
-            app:argType="com.example.kotlinpracticemirea.Item.Item" />
+            app:argType="com.singularity.eft_app.Item.Item" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.SettingsFragment"
+        android:name="com.singularity.eft_app.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.authorization.LoginFragment"
+        android:name="com.singularity.eft_app.fragments.authorization.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.authorization.RegisterFragment"
+        android:name="com.singularity.eft_app.fragments.authorization.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.kotlinpracticemirea.fragments.authorization.ProfileFragment"
+        android:name="com.singularity.eft_app.fragments.authorization.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.kotlinpracticemirea'
+    namespace 'com.singularity.eft_app'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.kotlinpracticemirea"
+        applicationId "com.singularity.eft_app"
         minSdk 28
         targetSdk 33
         versionCode 1
