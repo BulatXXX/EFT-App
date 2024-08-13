@@ -39,12 +39,7 @@ class RegisterFragment : Fragment() {
                 )
             }
         }
-        userViewModel.loggedInState.observe(viewLifecycleOwner) {
-            if (it) {
-                Navigation.findNavController(requireView())
-                    .navigate(RegisterFragmentDirections.actionRegisterFragmentToProfileFragment())
-            }
-        }
+
     }
 
     override fun onDestroy() {

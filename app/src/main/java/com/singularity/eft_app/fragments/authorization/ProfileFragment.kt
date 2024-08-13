@@ -34,12 +34,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userViewModel.loggedInState.observe(viewLifecycleOwner) {
-            if (!it) {
-                findNavController()
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-            }
-        }
+
         userViewModel.profilePic.observe(viewLifecycleOwner){
             binding.profilePic.setImageURI(it)
         }
@@ -55,10 +50,7 @@ class ProfileFragment : Fragment() {
             editBtn.setOnClickListener {
                 userViewModel.updateUser(requireContext(), profileName.text.toString())
             }
-            settingsBtn.setOnClickListener {
-                Navigation.findNavController(requireView())
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
-            }
+
 
 
             profilePic.apply {

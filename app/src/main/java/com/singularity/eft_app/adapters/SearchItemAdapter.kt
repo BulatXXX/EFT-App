@@ -1,21 +1,15 @@
 package com.singularity.eft_app.adapters
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Handler
-import android.os.Looper
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.singularity.eft_app.Item.Item
 import com.singularity.eft_app.R
-
 import com.singularity.eft_app.databinding.SearchItemBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class SearchItemAdapter(private val listener: Listener) :
@@ -24,22 +18,7 @@ class SearchItemAdapter(private val listener: Listener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item , listener: Listener) {
             binding.icon.setImageResource(R.drawable.knife_icon_w)
-
-            val handler = Handler(Looper.getMainLooper())
-            var image:Bitmap? = null
-            CoroutineScope(Dispatchers.IO).launch{
-                val iconUrl = item.iconLink
-                try {
-                    val inputStream = java.net.URL(iconUrl).openStream()
-                    image = BitmapFactory.decodeStream(inputStream)
-                    handler.post {
-                        binding.icon.setImageBitmap(image)
-                    }
-                }catch (e:Exception){
-                    e.printStackTrace()
-                }
-            }
-
+            Glide.with(binding.icon).load(item.iconLink).placeholder(R.drawable.knife_icon_w).into(binding.icon)
             binding.name.text = item.name
             binding.name.isSelected = true
             binding.parentConstraint.setOnClickListener {

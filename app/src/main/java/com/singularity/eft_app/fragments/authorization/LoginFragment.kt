@@ -29,10 +29,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            regBtn.setOnClickListener {
-                Navigation.findNavController(requireView())
-                    .navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
-            }
+
             logBtn.setOnClickListener {
                 loginUser()
             }

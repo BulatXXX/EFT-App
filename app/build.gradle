@@ -109,6 +109,8 @@ dependencies {
 
     // Optional: AndroidX Test - Mockito Android support (for instrumented tests)
     androidTestImplementation 'org.mockito:mockito-android:4.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
 }
 kapt {
     correctErrorTypes true
