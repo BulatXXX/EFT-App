@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import com.singularity.eft_app.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +20,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
@@ -39,12 +38,7 @@ class RegisterFragment : Fragment() {
                 )
             }
         }
-        userViewModel.loggedInState.observe(viewLifecycleOwner) {
-            if (it) {
-                Navigation.findNavController(requireView())
-                    .navigate(RegisterFragmentDirections.actionRegisterFragmentToProfileFragment())
-            }
-        }
+
     }
 
     override fun onDestroy() {

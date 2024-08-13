@@ -32,7 +32,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideItemRepository(dao: ItemDao,searchHistoryManager: SearchHistoryManager) = ItemRepository(dao, searchHistoryManager)
+    fun provideItemRepository(dao: ItemDao) = ItemRepository(dao)
 
     @Provides
     @Singleton

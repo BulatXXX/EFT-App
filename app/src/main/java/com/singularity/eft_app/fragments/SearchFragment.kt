@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() , SearchItemAdapter.Listener {
+class SearchFragment : Fragment(), SearchItemAdapter.Listener {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -34,32 +34,28 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
     val itemViewModel: ItemViewModel by viewModels()
 
 
-
-
-
-
     override fun onCreateView(
-        inflater: LayoutInflater , container: ViewGroup? ,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSearchBinding.inflate(layoutInflater , container , false)
+    ): View {
+        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n" , "ClickableViewAccessibility")
-    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
-        super.onViewCreated(view , savedInstanceState)
+    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val adapter = SearchItemAdapter(this)
         // itemViewModel.clearSearchHistory(requireContext())
 
 
-
         itemViewModel.searchFragmentState.observe(viewLifecycleOwner) {
+            @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (it) {
                 SearchFragmentState.IS_SHOWING_HISTORY -> {
-                 
-                    itemViewModel.getHistoryList(requireContext())
+
+                    // itemViewModel.getHistoryList(requireContext())
                     adapter.submitList(itemViewModel.searchHistoryList.value)
                     binding.searchIcon.setImageResource(R.drawable.trash)
                 }
@@ -85,53 +81,52 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
             }
         }
 
-        itemViewModel.searchHistoryList.observe(viewLifecycleOwner){
-            if (itemViewModel.searchFragmentState.value == SearchFragmentState.IS_SHOWING_HISTORY){
+        itemViewModel.searchHistoryList.observe(viewLifecycleOwner) {
+            if (itemViewModel.searchFragmentState.value == SearchFragmentState.IS_SHOWING_HISTORY) {
                 adapter.submitList(itemViewModel.searchHistoryList.value)
             }
         }
 
 
 
-        binding.searchBar.setOnTouchListener { view , event ->
+        binding.searchBar.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
 
-                if (view.isFocused) {
+                if (v.isFocused) {
                     val inputMethodManager =
-                        view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputMethodManager.hideSoftInputFromWindow(view.windowToken , 0)
+                        v.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
 
                     itemViewModel.searchFragmentState.value = SearchFragmentState.IS_IDLE
 
-                    view.clearFocus()
+                    v.clearFocus()
                 } else {
-                    if(binding.searchBar.text.isEmpty()) itemViewModel.searchFragmentState.value = SearchFragmentState.IS_SHOWING_HISTORY
+                    if (binding.searchBar.text.isEmpty())
+                        itemViewModel.searchFragmentState.value =
+                            SearchFragmentState.IS_SHOWING_HISTORY
 
                 }
             }
-            false // Возвращаем false, чтобы позволить другим обработчикам событий обрабатывать событие
+            false
         }
 
         binding.searchBar.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence? , start: Int , before: Int , count: Int) {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s?.length != 0) {
                     itemViewModel.searchItem(binding.searchBar.text.toString())
-
                     itemViewModel.searchFragmentState.value = SearchFragmentState.IS_SEARCHING
-
 
                 } else {
                     itemViewModel.searchJob?.cancel()
                     binding.pb.isVisible = false
                     binding.noItemsFoundTV.isVisible = false
-
                 }
             }
 
             override fun beforeTextChanged(
-                s: CharSequence? ,
-                start: Int ,
-                count: Int ,
+                s: CharSequence?,
+                start: Int,
+                count: Int,
                 after: Int
             ) {
             }
@@ -142,30 +137,24 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
         binding.searchList.adapter = adapter
 
         binding.searchList.layoutManager =
-            object : LinearLayoutManager(context , VERTICAL , false) {
+            object : LinearLayoutManager(context, VERTICAL, false) {
                 override fun canScrollVertically(): Boolean {
                     return true
                 }
             }
 
-
-
-
-
         binding.searchIcon.setOnClickListener {
             if (itemViewModel.searchFragmentState.value == SearchFragmentState.IS_SHOWING_HISTORY) {
-
-                itemViewModel.clearSearchHistory(requireContext())
-                Toast.makeText(requireContext(),"Search History is deleted!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Search History is deleted!", Toast.LENGTH_SHORT)
+                    .show()
                 itemViewModel.searchFragmentState.value = SearchFragmentState.IS_IDLE
 
-            }
-            else {
+            } else {
                 binding.searchBar.text.clear()
                 itemViewModel.clearSearchBar()
                 val imm =
                     it.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(it.windowToken , 0)
+                imm.hideSoftInputFromWindow(it.windowToken, 0)
                 binding.pb.isVisible = false
             }
         }
@@ -173,19 +162,15 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
         itemViewModel.foundItems.observe(viewLifecycleOwner) {
             var items = it
             if (items.size > 10) {
-                items = items.subList(0 , 10)
+                items = items.subList(0, 10)
                 binding.noItemsFoundTV.isVisible = false
             }
             if (items.isEmpty() && binding.searchBar.text.isNotEmpty()) {
                 binding.noItemsFoundTV.isVisible = true
             }
-
             adapter.submitList(items)
             binding.pb.isVisible = false
-
         }
-
-
 
         binding.refreshBtn.setOnClickListener {
             itemViewModel.searchItem(binding.searchBar.text.toString())
@@ -199,22 +184,15 @@ class SearchFragment : Fragment() , SearchItemAdapter.Listener {
                 adapter.submitList(emptyList())
             }
         }
-
-
     }
-
-
 
 
     override fun OnClick(item: Item) {
-        itemViewModel.saveToSharedPreferences(item , requireContext())
-
+        // itemViewModel.saveToSharedPreferences(item , requireContext())
         itemViewModel.searchFragmentState.value = SearchFragmentState.IS_SHOWING_SEARCH_RESULT
-
         val action = SearchFragmentDirections.actionSearchFragmentToItemFragment(item)
         Navigation.findNavController(requireView()).navigate(action)
     }
-
 }
 
 

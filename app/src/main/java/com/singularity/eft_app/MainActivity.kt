@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+
 import com.singularity.eft_app.databinding.ActivityMainBinding
 
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,10 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navHostFragment.navController
+        binding.toolbar.title = "EFT-APP"
+
         setContentView(binding.root)
-
-
 
     }
 

@@ -1,6 +1,5 @@
 package com.singularity.eft_app.Item
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -33,7 +32,7 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
         searchJob?.cancel()
         searchJob = viewModelScope.plus(Dispatchers.IO).launch {
             delay(1500)
-            repository.getItemsListFromApi(name)
+            repository.getItemsListFromApiByName(name)
         }
     }
 
@@ -60,17 +59,6 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
             val res = repository.checkIsFavourite(id)
             result.invoke(res)
         }
-    }
-
-    fun clearSearchHistory(context: Context){
-        searchHistoryList.value = emptyList()
-        repository.clearSearchHistory(context)
-    }
-    fun saveToSharedPreferences(item: Item, context: Context) {
-        repository.saveToSharedPreferences(item,context)
-    }
-    fun getHistoryList(context: Context){
-        repository.getHistoryList(context)
     }
 
 

@@ -1,19 +1,14 @@
 package com.singularity.eft_app.Item
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.singularity.eft_app.SearchHistoryManager
 import com.singularity.eft_app.retrofit.ItemInstance
 
 import com.singularity.eft_app.room.ItemDao
 import com.google.gson.Gson
-import org.json.JSONObject
 import javax.inject.Inject
 
 class ItemRepository @Inject constructor(
-    private val itemDao: ItemDao,
-    private val searchHistoryManager: SearchHistoryManager
+    private val itemDao: ItemDao
 ) {
     var favouriteItems = itemDao.getAllItems()
 
@@ -25,35 +20,36 @@ class ItemRepository @Inject constructor(
 
     val searchHistoryList = MutableLiveData<List<Item>>(emptyList())
 
+    suspend fun getItemsListFromApiByName(
+        name: String,
+        language: String = "en",
+        gameMode: String = "regular"
+    ) {
 
-    suspend fun getItemsListFromApi(name: String) {
-        Log.e("BOOBS","OK")
-        val paramObject = JSONObject()
-        paramObject.put(
-            "query", "query {items(name:\"$name\"){id\n" +
-                    "    name\n" +
-                    "    description\n" +
-                    "    avg24hPrice\n" +
-                    "    height\n" +
-                    "    width\n" +
-                    "    iconLink\n" +
-                    "    image512pxLink}}"
-        )
-
+        val query = """
+        {
+            items(lang: $language, name: "$name", gameMode: $gameMode) {
+                id
+                name
+                description
+                avg24hPrice
+                height
+                width
+                iconLink
+                image512pxLink
+            }
+        }
+    """.trimIndent()
         try {
-            val response = ItemInstance.ItemService.getItems(paramObject.toString())
-
+            val response = ItemInstance.ItemService.getItems(query)
             isResponseSuccessful.postValue(response.isSuccessful)
-
-            var responseBody = response.body().toString()
-
-            Log.e("response", responseBody)
+            val responseBody = response.body().toString()
             val gson = Gson()
             val responseData = gson.fromJson(responseBody, ResponseData::class.java)
             val items = responseData.data.items
             foundItems.postValue(items)
 
-            Log.e("BOOBS",foundItems.value.toString())
+
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
             isResponseSuccessful.postValue(false)
@@ -70,16 +66,4 @@ class ItemRepository @Inject constructor(
 
     fun checkIsFavourite(id: String): Boolean = itemDao.getItemById(id) != null
 
-    fun clearSearchHistory(context: Context) {
-        searchHistoryManager.clearSearchHistory(context)
-        searchHistoryList.postValue(emptyList())
-    }
-
-    fun saveToSharedPreferences(item: Item, context: Context) {
-        searchHistoryManager.saveToSharedPreferences(item, context)
-    }
-
-    fun getHistoryList(context: Context) {
-        searchHistoryList.postValue(searchHistoryManager.getHistoryList(context))
-    }
 }

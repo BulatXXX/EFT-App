@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.singularity.eft_app.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +22,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
@@ -34,12 +32,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userViewModel.loggedInState.observe(viewLifecycleOwner) {
-            if (!it) {
-                findNavController()
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-            }
-        }
+
         userViewModel.profilePic.observe(viewLifecycleOwner){
             binding.profilePic.setImageURI(it)
         }
@@ -55,10 +48,7 @@ class ProfileFragment : Fragment() {
             editBtn.setOnClickListener {
                 userViewModel.updateUser(requireContext(), profileName.text.toString())
             }
-            settingsBtn.setOnClickListener {
-                Navigation.findNavController(requireView())
-                    .navigate(ProfileFragmentDirections.actionProfileFragmentToSettingsFragment())
-            }
+
 
 
             profilePic.apply {
@@ -84,6 +74,7 @@ class ProfileFragment : Fragment() {
         startActivityForResult(galleryIntent, 1)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
