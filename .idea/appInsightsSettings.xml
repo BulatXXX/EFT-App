@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.kotlinpracticemirea" />
+                  <option name="appId" value="com.singularity.eft_app" />
                   <option name="mobileSdkAppId" value="1:215531601479:android:46291c7687740cdec33b62" />
                   <option name="projectId" value="eft-app-9eb52" />
                   <option name="projectNumber" value="215531601479" />
