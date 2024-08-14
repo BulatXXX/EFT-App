@@ -72,8 +72,6 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
     fun getHistoryList(context: Context){
         repository.getHistoryList(context)
     }
-
-
 }
 
 enum class SearchFragmentState(){

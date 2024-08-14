@@ -1,14 +1,12 @@
 package com.singularity.eft_app.Item
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.singularity.eft_app.SearchHistoryManager
 import com.singularity.eft_app.retrofit.ItemInstance
 
 import com.singularity.eft_app.room.ItemDao
 import com.google.gson.Gson
-import org.json.JSONObject
 import javax.inject.Inject
 
 class ItemRepository @Inject constructor(
@@ -24,7 +22,6 @@ class ItemRepository @Inject constructor(
     val isResponseSuccessful: MutableLiveData<Boolean> = MutableLiveData(true)
 
     val searchHistoryList = MutableLiveData<List<Item>>(emptyList())
-
 
     suspend fun getItemsListFromApi(
         name: String,

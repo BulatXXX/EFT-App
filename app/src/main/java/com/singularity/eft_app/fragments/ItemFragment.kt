@@ -1,7 +1,5 @@
 package com.singularity.eft_app.fragments
 
-
-
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -38,18 +36,15 @@ class ItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItemBinding.inflate(layoutInflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         itemViewModel.check(args.item.id) {
-            setUpLike(it);
+            setUpLike(it)
             isFavourite = it
         }
-
 
         binding.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
@@ -77,7 +72,6 @@ class ItemFragment : Fragment() {
         }
     }
 
-
     private fun setUpInterface(item: Item) {
         binding.pb.isVisible = true
         binding.itemName.text = item.name
@@ -89,8 +83,6 @@ class ItemFragment : Fragment() {
             binding.itemPrice.setTextColor(Color.RED)
         } else binding.itemPrice.text = price.toString() + " ROUBLES"
         loadImage(item)
-
-
     }
 
     private fun loadImage(item: Item) {
@@ -123,6 +115,4 @@ class ItemFragment : Fragment() {
         binding.pb.isVisible = false
         binding.itemImage.isVisible = true
     }
-
-
 }

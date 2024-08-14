@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class FleaApplication: Application() {
+class EFTApplication: Application() {
     var darkTheme = false
-    lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate() {
         sharedPreferences = applicationContext.getSharedPreferences("MODE" , Context.MODE_PRIVATE)
         darkTheme = sharedPreferences.getBoolean("DarkThemeEnabled",false) == true
@@ -28,6 +28,5 @@ class FleaApplication: Application() {
                 AppCompatDelegate.MODE_NIGHT_NO
             }
         )
-
     }
 }

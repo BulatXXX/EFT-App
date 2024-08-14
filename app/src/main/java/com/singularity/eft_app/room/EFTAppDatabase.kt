@@ -5,9 +5,8 @@ import androidx.room.RoomDatabase
 
 import com.singularity.eft_app.Item.Item
 
-
 @Database(entities = [Item::class], version = 1)
-abstract class FleaMarketDatabase: RoomDatabase() {
+abstract class EFTAppDatabase: RoomDatabase() {
     abstract fun itemDao(): ItemDao
 
 }

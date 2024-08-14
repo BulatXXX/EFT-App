@@ -1,42 +1,21 @@
 package com.singularity.eft_app.adapters
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.singularity.eft_app.Item.Item
 import com.singularity.eft_app.databinding.FleaMarketItemBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FleaMarketItemAdapter(private val listener: Listener) :
     ListAdapter<Item , FleaMarketItemAdapter.FleaMarketItemHolder>(DiffCallback()) {
     class FleaMarketItemHolder(private val binding: FleaMarketItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val handler = Handler(Looper.getMainLooper())
-        var image: Bitmap? = null
         fun bind(item: Item , listener: Listener) {
             binding.nameItem.text = item.name
-            // binding.iconItem.setImageResource(item.image512pxLink)
-            CoroutineScope(Dispatchers.IO).launch {
-                val iconUrl = item.iconLink
-                try {
-                    val inputStream = java.net.URL(iconUrl).openStream()
-                    image = BitmapFactory.decodeStream(inputStream)
-
-                    handler.post {
-                        binding.iconItem.setImageBitmap(image)
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
+            Glide.with(binding.iconItem).load(item.iconLink).into(binding.iconItem)
             binding.nameItem.isSelected = true
             if (item.avg24hPrice == 0) {
                 binding.priceItem.isSelected = true
@@ -46,19 +25,16 @@ class FleaMarketItemAdapter(private val listener: Listener) :
                 binding.priceItem.text = item.avg24hPrice.toString() + " RUB"
             }
             binding.item.setOnClickListener {
-                listener.OnClick(item)
+                listener.onClick(item)
             }
         }
-
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup , viewType: Int): FleaMarketItemHolder {
         val binding =
             FleaMarketItemBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
         return FleaMarketItemHolder(binding)
     }
-
 
     override fun onBindViewHolder(holder: FleaMarketItemHolder, position: Int) {
         val currentItem = getItem(position)
@@ -76,6 +52,6 @@ class FleaMarketItemAdapter(private val listener: Listener) :
     }
 
     interface Listener {
-        fun OnClick(item: Item)
+        fun onClick(item: Item)
     }
 }

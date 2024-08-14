@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.singularity.eft_app.FleaApplication
+import com.singularity.eft_app.EFTApplication
 import com.singularity.eft_app.R
 import com.singularity.eft_app.databinding.FragmentSettingsBinding
-
 
 class SettingsFragment : Fragment() {
 
@@ -21,7 +20,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.switchTheme.setOnCheckedChangeListener { switcher, checked ->
-            (requireActivity().applicationContext as FleaApplication).switchTheme(checked)
+            (requireActivity().applicationContext as EFTApplication).switchTheme(checked)
             requireActivity().recreate()
         }
         super.onViewCreated(view, savedInstanceState)
@@ -31,14 +30,14 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         initInterface()
         return binding.root
     }
 
     private fun initInterface() {
-        if ((requireActivity().applicationContext as FleaApplication).darkTheme) {
+        if ((requireActivity().applicationContext as EFTApplication).darkTheme) {
             binding.imageView.setImageResource(
                 R.drawable.moon
             )
@@ -52,6 +51,5 @@ class SettingsFragment : Fragment() {
             binding.switchTheme.text = "Light Theme"
             binding.switchTheme.isChecked = false
         }
-
     }
 }

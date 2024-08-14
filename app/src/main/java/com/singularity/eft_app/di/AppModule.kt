@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.singularity.eft_app.Item.ItemRepository
 import com.singularity.eft_app.SearchHistoryManager
 import com.singularity.eft_app.fragments.authorization.UserRepository
-import com.singularity.eft_app.room.FleaMarketDatabase
+import com.singularity.eft_app.room.EFTAppDatabase
 import com.singularity.eft_app.room.ItemDao
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -21,14 +21,13 @@ object AppModule {
     @Singleton
     fun provideDatabase(
         app: Application ,
-    ) = Room.databaseBuilder(app , FleaMarketDatabase::class.java , "items-database")
+    ) = Room.databaseBuilder(app , EFTAppDatabase::class.java , "items-database")
         .fallbackToDestructiveMigration()
         .build()
 
     @Provides
     @Singleton
-    fun provideDao(db: FleaMarketDatabase) = db.itemDao()
-
+    fun provideDao(db: EFTAppDatabase) = db.itemDao()
 
     @Provides
     @Singleton
@@ -45,7 +44,5 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFireBaseAuth() = FirebaseAuth.getInstance()
-
-
 }
 

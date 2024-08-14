@@ -1,6 +1,5 @@
 package com.singularity.eft_app.fragments
 
-
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,20 +19,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
-
-
     private val itemViewModel: ItemViewModel by viewModels()
     private val adapter = FleaMarketItemAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentNotesBinding.inflate(inflater , container , false)
         return binding.root
     }
-
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
@@ -45,12 +41,9 @@ class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
             adapter.submitList(it)
             binding.rv.adapter = adapter
         }
-
-
-
     }
 
-    override fun OnClick(item: Item) {
+    override fun onClick(item: Item) {
         val action = NotesFragmentDirections.actionNotesFragmentToItemFragment(item)
         Navigation.findNavController(requireView()).navigate(action)
     }
