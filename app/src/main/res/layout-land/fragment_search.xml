@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".fragments.SearchFragment">
+    tools:context=".UI.SearchFragment">
 
     <EditText
         android:id="@+id/searchBar"
@@ -17,7 +17,8 @@
         android:textColor="?attr/textFillColor"
         android:textColorHint="@color/grey"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
 
     <ImageView
         android:id="@+id/searchIcon"
@@ -27,7 +28,8 @@
         android:src="@drawable/search"
         app:layout_constraintBottom_toBottomOf="@+id/searchBar"
         app:layout_constraintStart_toEndOf="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="@+id/searchBar" />
+        app:layout_constraintTop_toTopOf="@+id/searchBar"
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:id="@+id/pb"
@@ -57,7 +59,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
     <TextView
         android:id="@+id/noItemsFoundTV"
         android:layout_width="wrap_content"
@@ -71,6 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

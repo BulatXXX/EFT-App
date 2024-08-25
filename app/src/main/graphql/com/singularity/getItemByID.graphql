@@ -1,0 +1,12 @@
+query getItemByID($id: ID!){
+    item(id: $id){
+        id
+        name
+        description
+        avg24hPrice
+        height
+        width
+        iconLink
+        image512pxLink
+    }
+}

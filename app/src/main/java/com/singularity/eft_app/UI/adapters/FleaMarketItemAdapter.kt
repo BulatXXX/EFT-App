@@ -1,5 +1,6 @@
-package com.singularity.eft_app.adapters
+package com.singularity.eft_app.UI.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,10 +11,11 @@ import com.singularity.eft_app.Item.Item
 import com.singularity.eft_app.databinding.FleaMarketItemBinding
 
 class FleaMarketItemAdapter(private val listener: Listener) :
-    ListAdapter<Item , FleaMarketItemAdapter.FleaMarketItemHolder>(DiffCallback()) {
+    ListAdapter<Item, FleaMarketItemAdapter.FleaMarketItemHolder>(DiffCallback()) {
     class FleaMarketItemHolder(private val binding: FleaMarketItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item , listener: Listener) {
+        @SuppressLint("SetTextI18n")
+        fun bind(item: Item, listener: Listener) {
             binding.nameItem.text = item.name
             Glide.with(binding.iconItem).load(item.iconLink).into(binding.iconItem)
             binding.nameItem.isSelected = true
@@ -42,11 +44,11 @@ class FleaMarketItemAdapter(private val listener: Listener) :
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Item>() {
-        override fun areItemsTheSame(oldItem: Item , newItem: Item): Boolean =
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean =
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: Item ,
+            oldItem: Item,
             newItem: Item
         ): Boolean = oldItem == newItem
     }

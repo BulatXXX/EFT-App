@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.authorization.ProfileFragment">
+    tools:context=".UI.authorization.ProfileFragment">
 
 
     <TextView
@@ -22,7 +22,7 @@
         android:src="@drawable/settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/profileName"
@@ -50,7 +50,8 @@
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/Icon.LargeIcon" />
+            style="@style/Icon.LargeIcon"
+            tools:ignore="ContentDescription" />
     </com.google.android.material.card.MaterialCardView>
 
     <ImageView
@@ -59,7 +60,8 @@
         android:src="@drawable/log_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editBtn"

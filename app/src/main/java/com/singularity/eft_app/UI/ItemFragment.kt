@@ -1,5 +1,6 @@
-package com.singularity.eft_app.fragments
+package com.singularity.eft_app.UI
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -72,6 +73,7 @@ class ItemFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUpInterface(item: Item) {
         binding.pb.isVisible = true
         binding.itemName.text = item.name
@@ -81,7 +83,7 @@ class ItemFragment : Fragment() {
         if (price == 0) {
             binding.itemPrice.text = "Item can't be bought at a flea market!"
             binding.itemPrice.setTextColor(Color.RED)
-        } else binding.itemPrice.text = price.toString() + " ROUBLES"
+        } else binding.itemPrice.text =  "$price ROUBLES"
         loadImage(item)
     }
 

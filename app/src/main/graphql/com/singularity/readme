@@ -1,0 +1,8 @@
+These types were added manually:
+
+-ItemType
+-LanguageCode
+-ItemCategoryName
+-HandbookCategoryName
+
+To prevent exceptions check the docs https://tarkov.dev/api/

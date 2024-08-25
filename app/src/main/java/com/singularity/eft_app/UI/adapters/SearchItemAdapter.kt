@@ -1,4 +1,4 @@
-package com.singularity.eft_app.adapters
+package com.singularity.eft_app.UI.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,10 +11,10 @@ import com.singularity.eft_app.R
 import com.singularity.eft_app.databinding.SearchItemBinding
 
 class SearchItemAdapter(private val listener: Listener) :
-    ListAdapter<Item , SearchItemAdapter.SearchItemHolder>(DiffCallback()) {
+    ListAdapter<Item, SearchItemAdapter.SearchItemHolder>(DiffCallback()) {
     class SearchItemHolder(private val binding: SearchItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item , listener: Listener) {
+        fun bind(item: Item, listener: Listener) {
             binding.icon.setImageResource(R.drawable.knife_icon_w)
             Glide.with(binding.icon).load(item.iconLink).placeholder(R.drawable.knife_icon_w).into(binding.icon)
             binding.name.text = item.name
@@ -37,11 +37,11 @@ class SearchItemAdapter(private val listener: Listener) :
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Item>() {
-        override fun areItemsTheSame(oldItem: Item , newItem: Item): Boolean =
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean =
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: Item ,
+            oldItem: Item,
             newItem: Item
         ): Boolean = oldItem == newItem
     }

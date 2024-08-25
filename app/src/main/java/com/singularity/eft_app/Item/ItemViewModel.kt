@@ -1,6 +1,5 @@
 package com.singularity.eft_app.Item
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -8,13 +7,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import javax.inject.Inject
 
+
 @HiltViewModel
-class ItemViewModel @Inject constructor(private val repository: ItemRepository) :
+class ItemViewModel @Inject constructor(
+    private val repository: ItemRepository,
+    ) :
     ViewModel() {
 
     val foundItems = repository.foundItems
@@ -25,15 +26,14 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
 
     val searchHistoryList = repository.searchHistoryList
 
-    val searchFragmentState = MutableLiveData<SearchFragmentState>(SearchFragmentState.IS_IDLE)
+    val searchFragmentState = MutableLiveData(SearchFragmentState.IS_IDLE)
 
     val isResponseSuccessful = repository.isResponseSuccessful
 
     fun searchItem(name: String) {
         searchJob?.cancel()
         searchJob = viewModelScope.plus(Dispatchers.IO).launch {
-            delay(1500)
-            repository.getItemsListFromApi(name)
+            repository.getItemList(name)
         }
     }
 
@@ -55,26 +55,28 @@ class ItemViewModel @Inject constructor(private val repository: ItemRepository) 
         }
     }
 
-    fun check(id: String , result: (Boolean) -> Unit) {
+    fun check(id: String, result: (Boolean) -> Unit) {
         viewModelScope.plus(Dispatchers.IO).launch() {
             val res = repository.checkIsFavourite(id)
             result.invoke(res)
         }
     }
 
-    fun clearSearchHistory(context: Context){
+    fun clearSearchHistory() {
         searchHistoryList.value = emptyList()
-        repository.clearSearchHistory(context)
+        repository.clearSearchHistory()
     }
-    fun saveToSharedPreferences(item: Item, context: Context) {
-        repository.saveToSharedPreferences(item,context)
+
+    fun saveToSharedPreferences(item: Item) {
+        repository.saveToSharedPreferences(item)
     }
-    fun getHistoryList(context: Context){
-        repository.getHistoryList(context)
+
+    fun getHistoryList() {
+        repository.getHistoryList()
     }
 }
 
-enum class SearchFragmentState(){
+enum class SearchFragmentState {
     IS_SHOWING_HISTORY,
     IS_SHOWING_SEARCH_RESULT,
     IS_SEARCHING,

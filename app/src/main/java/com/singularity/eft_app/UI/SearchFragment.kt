@@ -1,4 +1,4 @@
-package com.singularity.eft_app.fragments
+package com.singularity.eft_app.UI
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -20,7 +20,7 @@ import com.singularity.eft_app.Item.Item
 import com.singularity.eft_app.Item.ItemViewModel
 import com.singularity.eft_app.Item.SearchFragmentState
 import com.singularity.eft_app.R
-import com.singularity.eft_app.adapters.SearchItemAdapter
+import com.singularity.eft_app.UI.adapters.SearchItemAdapter
 import com.singularity.eft_app.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,7 +48,7 @@ class SearchFragment : Fragment(), SearchItemAdapter.Listener {
             when (it) {
                 SearchFragmentState.IS_SHOWING_HISTORY -> {
 
-                    itemViewModel.getHistoryList(requireContext())
+                    itemViewModel.getHistoryList()
                     adapter.submitList(itemViewModel.searchHistoryList.value)
                     binding.searchIcon.setImageResource(R.drawable.trash)
                 }
@@ -139,7 +139,7 @@ class SearchFragment : Fragment(), SearchItemAdapter.Listener {
         binding.searchIcon.setOnClickListener {
             if (itemViewModel.searchFragmentState.value == SearchFragmentState.IS_SHOWING_HISTORY) {
 
-                itemViewModel.clearSearchHistory(requireContext())
+                itemViewModel.clearSearchHistory()
                 Toast.makeText(requireContext(), "Search History is deleted!", Toast.LENGTH_SHORT)
                     .show()
                 itemViewModel.searchFragmentState.value = SearchFragmentState.IS_IDLE
@@ -184,7 +184,7 @@ class SearchFragment : Fragment(), SearchItemAdapter.Listener {
     }
 
     override fun onClick(item: Item) {
-        itemViewModel.saveToSharedPreferences(item, requireContext())
+        itemViewModel.saveToSharedPreferences(item)
 
         itemViewModel.searchFragmentState.value = SearchFragmentState.IS_SHOWING_SEARCH_RESULT
 

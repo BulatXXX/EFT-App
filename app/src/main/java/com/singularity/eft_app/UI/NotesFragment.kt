@@ -1,4 +1,4 @@
-package com.singularity.eft_app.fragments
+package com.singularity.eft_app.UI
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.singularity.eft_app.Item.Item
 import com.singularity.eft_app.Item.ItemViewModel
-import com.singularity.eft_app.adapters.FleaMarketItemAdapter
+import com.singularity.eft_app.UI.adapters.FleaMarketItemAdapter
 import com.singularity.eft_app.databinding.FragmentNotesBinding
 import dagger.hilt.android.AndroidEntryPoint
 

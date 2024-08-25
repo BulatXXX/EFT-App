@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent"
-    tools:context=".fragments.ItemFragment">
+    tools:context=".UI.ItemFragment">
 
     <ImageView
         android:id="@+id/backButton"
         style="@style/Icon.TopBarButton"
         android:src="@drawable/back_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/likeButton"
@@ -20,7 +21,7 @@
         android:src="@drawable/like_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-         />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/item_name"
@@ -50,7 +51,8 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_name" />
+        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/priceTV"

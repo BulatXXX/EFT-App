@@ -1,17 +1,18 @@
 package com.singularity.eft_app.Item
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.singularity.eft_app.SearchHistoryManager
-import com.singularity.eft_app.retrofit.ItemInstance
 
 import com.singularity.eft_app.room.ItemDao
-import com.google.gson.Gson
+import com.singularity.apollo.type.GameMode
+import com.singularity.apollo.type.LanguageCode
+import com.singularity.eft_app.apollo.ItemClient
 import javax.inject.Inject
 
 class ItemRepository @Inject constructor(
     private val itemDao: ItemDao,
-    private val searchHistoryManager: SearchHistoryManager
+    private val searchHistoryManager: SearchHistoryManager,
+    private val apolloItemClient: ItemClient
 ) {
     var favouriteItems = itemDao.getAllItems()
 
@@ -23,40 +24,14 @@ class ItemRepository @Inject constructor(
 
     val searchHistoryList = MutableLiveData<List<Item>>(emptyList())
 
-    suspend fun getItemsListFromApi(
+
+
+    suspend fun getItemList(
         name: String,
-        language: String = "en",
-        gameMode: String = "regular"
+        languageCode: LanguageCode = LanguageCode.en,
+        gameMode: GameMode = GameMode.regular
     ) {
-
-        val query = """
-        {
-            items(lang: $language, name: "$name", gameMode: $gameMode) {
-                id
-                name
-                description
-                avg24hPrice
-                height
-                width
-                iconLink
-                image512pxLink
-            }
-        }
-    """.trimIndent()
-        try {
-            val response = ItemInstance.ItemService.getItems(query)
-            isResponseSuccessful.postValue(response.isSuccessful)
-            val responseBody = response.body().toString()
-            val gson = Gson()
-            val responseData = gson.fromJson(responseBody, ResponseData::class.java)
-            val items = responseData.data.items
-            foundItems.postValue(items)
-
-
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            isResponseSuccessful.postValue(false)
-        }
+        foundItems.postValue(apolloItemClient.searchItemsByName(name, languageCode, gameMode).orEmpty())
     }
 
     suspend fun addItemToFavourites(item: Item) {
@@ -69,16 +44,16 @@ class ItemRepository @Inject constructor(
 
     fun checkIsFavourite(id: String): Boolean = itemDao.getItemById(id) != null
 
-    fun clearSearchHistory(context: Context) {
-        searchHistoryManager.clearSearchHistory(context)
+    fun clearSearchHistory() {
+        searchHistoryManager.clearSearchHistory()
         searchHistoryList.postValue(emptyList())
     }
 
-    fun saveToSharedPreferences(item: Item, context: Context) {
-        searchHistoryManager.saveToSharedPreferences(item, context)
+    fun saveToSharedPreferences(item: Item) {
+        searchHistoryManager.saveToSharedPreferences(item)
     }
 
-    fun getHistoryList(context: Context) {
-        searchHistoryList.postValue(searchHistoryManager.getHistoryList(context))
+    fun getHistoryList() {
+        searchHistoryList.postValue(searchHistoryManager.getHistoryList())
     }
 }

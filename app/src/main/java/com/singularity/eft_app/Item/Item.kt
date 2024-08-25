@@ -2,13 +2,10 @@ package com.singularity.eft_app.Item
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.regex.Pattern
 
-data class ItemData(val items: List<Item>)
-data class ResponseData(val data: ItemData)
 @Entity(tableName = "items")
 data class Item(
     val name: String? ,
@@ -17,7 +14,6 @@ data class Item(
     val height: Int = 0 ,
     val iconLink: String? = "" ,
     @PrimaryKey
-    @NonNull
     val id: String="",
     val image512pxLink: String? = "" ,
     val width: Int = 0
@@ -64,24 +60,19 @@ data class Item(
             if (matcher.find()) {
                 return Item(
                     matcher.group(1),
-                    matcher.group(2).toInt(),
+                    matcher.group(2)?.toInt() ?: 0,
                     matcher.group(3),
-                    matcher.group(4).toInt(),
+                    matcher.group(4)?.toInt() ?: 0,
                     matcher.group(5),
-                    matcher.group(6),
+                    matcher.group(6)?.toString() ?: "",
                     matcher.group(7),
-                    matcher.group(8).toInt()
+                    matcher.group(8)?.toInt() ?: 0
                 )
             } else {
                 throw IllegalArgumentException("Invalid string format")
             }
         }
     }
-
-    fun toHistoryString(): String {
-        return "[${name}, ${iconLink}]"
-    }
-
 
 
 }

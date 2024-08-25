@@ -4,17 +4,20 @@ import android.content.Context
 import android.content.SharedPreferences
 
 import com.singularity.eft_app.Item.Item
+import javax.inject.Inject
 
-class SearchHistoryManager() {
+class SearchHistoryManager @Inject constructor(
+    private val context: Context
+) {
     private val SHARED_PREFERENCES_NAME = "SEARCH_HISTORY"
     private val SEARCH_HISTORY_KEY = "HISTORY_LIST"
 
-    fun clearSearchHistory(context: Context){
+    fun clearSearchHistory(){
         val sharedPreferences =
             context.getSharedPreferences(SHARED_PREFERENCES_NAME , Context.MODE_PRIVATE)
         sharedPreferences.edit().putString(SEARCH_HISTORY_KEY,"").apply()
     }
-    fun saveToSharedPreferences(item: Item , context: Context) {
+    fun saveToSharedPreferences(item: Item) {
         val sharedPreferences =
             context.getSharedPreferences(SHARED_PREFERENCES_NAME , Context.MODE_PRIVATE)
         val searchHistoryList = ArrayList<Item>(getHistoryList(sharedPreferences))
@@ -29,7 +32,7 @@ class SearchHistoryManager() {
         val searchHistoryListString: String = parseItemsListToString(searchHistoryList)
         sharedPreferences.edit().putString(SEARCH_HISTORY_KEY,searchHistoryListString).apply()
     }
-    fun getHistoryList(context: Context): List<Item> {
+    fun getHistoryList(): List<Item> {
         val searchHistoryListString =
             context.getSharedPreferences(SHARED_PREFERENCES_NAME,Context.MODE_PRIVATE).getString(SEARCH_HISTORY_KEY , "").toString()
 

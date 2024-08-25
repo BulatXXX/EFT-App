@@ -2,9 +2,16 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.apollographql.apollo3").version("3.7.3")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
+}
+
+apollo {
+    service("service"){
+        packageName.set("com.singularity.apollo")
+    }
 }
 
 android {
@@ -94,4 +101,7 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
+
+    //Apollo
+    implementation("com.apollographql.apollo3:apollo-runtime:3.7.3")
 }

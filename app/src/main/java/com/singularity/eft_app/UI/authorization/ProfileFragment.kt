@@ -1,4 +1,4 @@
-package com.singularity.eft_app.fragments.authorization
+package com.singularity.eft_app.UI.authorization
 
 import android.app.Activity
 import android.content.Intent
@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.singularity.eft_app.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +22,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
@@ -43,7 +41,7 @@ class ProfileFragment : Fragment() {
 
             textView.text = userViewModel.displayName.value
             logoutBtn.setOnClickListener {
-                userViewModel.logOutUser(requireContext())
+                userViewModel.logOutUser()
             }
             profileName.hint = userViewModel.displayName.value
 
@@ -73,10 +71,13 @@ class ProfileFragment : Fragment() {
 
     private fun chooseProfilePic() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        @Suppress("DEPRECATION")
         startActivityForResult(galleryIntent, 1)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val imageUri = data.data

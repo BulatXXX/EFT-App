@@ -1,0 +1,12 @@
+query searchItemByName($name: String!, $lang: LanguageCode!, $gamemode: GameMode!) {
+    items(lang: $lang, name: $name, gameMode: $gamemode) {
+        id
+        name
+        description
+        avg24hPrice
+        height
+        width
+        iconLink
+        image512pxLink
+    }
+}

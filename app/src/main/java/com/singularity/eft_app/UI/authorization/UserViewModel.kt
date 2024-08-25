@@ -1,4 +1,4 @@
-package com.singularity.eft_app.fragments.authorization
+package com.singularity.eft_app.UI.authorization
 
 import android.content.Context
 import android.net.Uri
@@ -30,7 +30,7 @@ class UserViewModel @Inject constructor(private val repository: UserRepository) 
         repository.checkLoggedInState(context)
     }
 
-    fun logOutUser(context: Context) {
+    fun logOutUser() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.logOutUser()
         }

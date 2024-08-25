@@ -1,4 +1,4 @@
-package com.singularity.eft_app.fragments.authorization
+package com.singularity.eft_app.UI.authorization
 
 import android.content.Context
 import android.net.Uri

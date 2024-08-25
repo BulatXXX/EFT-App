@@ -1,4 +1,4 @@
-package com.singularity.eft_app.fragments
+package com.singularity.eft_app.UI
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -36,6 +36,7 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initInterface() {
         if ((requireActivity().applicationContext as EFTApplication).darkTheme) {
             binding.imageView.setImageResource(
