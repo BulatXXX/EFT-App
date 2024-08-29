@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.singularity.eft_app.Item.Item
 import com.singularity.eft_app.Item.ItemViewModel
 import com.singularity.eft_app.UI.adapters.FleaMarketItemAdapter
-import com.singularity.eft_app.databinding.FragmentNotesBinding
+import com.singularity.eft_app.databinding.FragmentFavouritesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
-    private var _binding: FragmentNotesBinding? = null
+class FavouritesFragment : Fragment() , FleaMarketItemAdapter.Listener {
+    private var _binding: FragmentFavouritesBinding? = null
     private val binding get() = _binding!!
     private val itemViewModel: ItemViewModel by viewModels()
     private val adapter = FleaMarketItemAdapter(this)
@@ -27,7 +27,7 @@ class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentNotesBinding.inflate(inflater , container , false)
+        _binding = FragmentFavouritesBinding.inflate(inflater , container , false)
         return binding.root
     }
 
@@ -44,7 +44,7 @@ class NotesFragment : Fragment() , FleaMarketItemAdapter.Listener {
     }
 
     override fun onClick(item: Item) {
-        val action = NotesFragmentDirections.actionNotesFragmentToItemFragment(item)
+        val action = FavouritesFragmentDirections.actionNotesFragmentToItemFragment(item)
         Navigation.findNavController(requireView()).navigate(action)
     }
 }

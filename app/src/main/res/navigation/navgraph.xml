@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.singularity.eft_app.UI.NotesFragment"
+        android:name="com.singularity.eft_app.UI.FavouritesFragment"
         android:label="fragment_notes"
-        tools:layout="@layout/fragment_notes" >
+        tools:layout="@layout/fragment_favourites" >
         <action
             android:id="@+id/action_notesFragment_to_itemFragment"
             app:destination="@id/itemFragment" />
