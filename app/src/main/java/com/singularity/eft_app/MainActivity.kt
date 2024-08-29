@@ -19,7 +19,22 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navHostFragment.navController
+
+        val navController = navHostFragment.navController
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.searchFragment -> binding.bottomNavigationView.menu.findItem(R.id.searchFragment).isChecked =
+                    true
+
+                R.id.favouritesFragment -> binding.bottomNavigationView.menu.findItem(R.id.favouritesFragment).isChecked =
+                    true
+
+                R.id.itemFragment -> binding.bottomNavigationView.menu.findItem(R.id.searchFragment).isChecked =
+                    true
+
+            }
+        }
         setContentView(binding.root)
     }
 

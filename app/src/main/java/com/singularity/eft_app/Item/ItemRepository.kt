@@ -14,7 +14,9 @@ class ItemRepository @Inject constructor(
     private val searchHistoryManager: SearchHistoryManager,
     private val apolloItemClient: ItemClient
 ) {
-    var favouriteItems = itemDao.getAllItems()
+    var favouriteItems = MutableLiveData<List<Item>>()
+
+    private val favouriteItemsIds = itemDao.getAllItemsIds()
 
     private val listOfFoundItems = MutableLiveData<List<Item>>(emptyList())
     val foundItems: MutableLiveData<List<Item>>
@@ -25,6 +27,11 @@ class ItemRepository @Inject constructor(
     val searchHistoryList = MutableLiveData<List<Item>>(emptyList())
 
 
+    suspend fun getFavouritesItemsList(){
+        favouriteItemsIds.collect() {
+            favouriteItems.postValue(apolloItemClient.getItemByIds(it))
+        }
+    }
 
     suspend fun getItemList(
         name: String,

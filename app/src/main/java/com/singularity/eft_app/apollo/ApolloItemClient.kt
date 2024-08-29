@@ -2,6 +2,7 @@ package com.singularity.eft_app.apollo
 
 import com.apollographql.apollo3.ApolloClient
 import com.singularity.apollo.GetItemByIDQuery
+import com.singularity.apollo.GetItemsByIDQuery
 import com.singularity.apollo.SearchItemByNameQuery
 import com.singularity.apollo.type.GameMode
 import com.singularity.apollo.type.LanguageCode
@@ -37,4 +38,15 @@ class ApolloItemClient(
             .data
             ?.item?.toItem()
     }
+
+    override suspend fun getItemByIds(ids: List<String>): List<Item> {
+        return apolloClient
+            .query(GetItemsByIDQuery(ids = ids, lang = LanguageCode.en,GameMode.regular))
+            .execute()
+            .data
+            ?.items?.mapNotNull { item -> item?.toItem() }
+            ?: emptyList()
+    }
+
+
 }

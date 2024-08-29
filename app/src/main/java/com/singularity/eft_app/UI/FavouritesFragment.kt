@@ -27,6 +27,7 @@ class FavouritesFragment : Fragment() , FleaMarketItemAdapter.Listener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        itemViewModel.getFavouriteItemsList()
         _binding = FragmentFavouritesBinding.inflate(inflater , container , false)
         return binding.root
     }
@@ -47,4 +48,5 @@ class FavouritesFragment : Fragment() , FleaMarketItemAdapter.Listener {
         val action = FavouritesFragmentDirections.actionNotesFragmentToItemFragment(item)
         Navigation.findNavController(requireView()).navigate(action)
     }
+
 }

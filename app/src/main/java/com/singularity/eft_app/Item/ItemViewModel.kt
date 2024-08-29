@@ -2,7 +2,6 @@ package com.singularity.eft_app.Item
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +21,7 @@ class ItemViewModel @Inject constructor(
 
     var searchJob: Job? = null
 
-    val favouriteItems = repository.favouriteItems.asLiveData()
+    val favouriteItems = repository.favouriteItems
 
     val searchHistoryList = repository.searchHistoryList
 
@@ -73,6 +72,12 @@ class ItemViewModel @Inject constructor(
 
     fun getHistoryList() {
         repository.getHistoryList()
+    }
+
+    fun getFavouriteItemsList(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getFavouritesItemsList()
+        }
     }
 }
 

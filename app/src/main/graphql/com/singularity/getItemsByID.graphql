@@ -1,0 +1,12 @@
+query getItemsByID($ids: [ID!]!,$lang: LanguageCode!,$gameMode: GameMode!) {
+    items(ids: $ids,lang: $lang,gameMode: $gameMode) {
+        id
+        name
+        description
+        avg24hPrice
+        height
+        width
+        iconLink
+        image512pxLink
+    }
+}
