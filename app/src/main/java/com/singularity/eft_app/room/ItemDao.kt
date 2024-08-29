@@ -10,8 +10,12 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
+
     @Query("SELECT * FROM items")
-    fun getAllItems(): Flow<List<Item>>
+    fun getAllItems(): Flow<List<String>>
+
+    @Query("SELECT id FROM items")
+    fun getAllItemsIds(): Flow<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addItem(item: Item)
@@ -21,6 +25,5 @@ interface ItemDao {
 
     @Query("SELECT name FROM items WHERE id = :id")
     fun getItemById(id: String): String?
-
 
 }
