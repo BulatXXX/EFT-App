@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 import com.singularity.eft_app.Item.Item
 
-@Database(entities = [Item::class], version = 1)
+@Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class EFTAppDatabase: RoomDatabase() {
     abstract fun itemDao(): ItemDao
 

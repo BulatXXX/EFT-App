@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface ItemDao {
 
     @Query("SELECT * FROM items")
-    fun getAllItems(): Flow<List<String>>
+    fun getAllItems(): Flow<List<Item>>
 
     @Query("SELECT id FROM items")
     fun getAllItemsIds(): Flow<List<String>>
